@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - /data/db
+    ports:
+      - "27017:27017"
+    command: --smallfiles --rest
+    
+  build_worker:
+    image: tock/build_worker:0.1-SNAPSHOT
+    depends_on:
+      - mongo
+    environment:
+      - tock_mongo_url=mongodb://mongo:27017
+
+  duckling:
+    image: tock/duckling:0.1-SNAPSHOT
+    depends_on:
+      - mongo
+    environment:
+      - tock_mongo_url=mongodb://mongo:27017
+    expose:
+      - "8080"
+
+  admin_web:
+    image: tock/nlp_admin:0.1-SNAPSHOT
+    depends_on:
+      - mongo
+      - duckling
+    environment:
+      - tock_mongo_url=mongodb://mongo:27017
+      - nlp_entities_url=http://duckling:8080/
+    ports:
+      - "80:8080"
+
+  nlp_api:
+    image: tock/nlp_api:0.1-SNAPSHOT
+    depends_on:
+      - mongo
+      - duckling
+    environment:
+      - tock_mongo_url=mongodb://mongo:27017
+      - nlp_entities_url=http://duckling:8080/
+    ports:
+      - "8081:8080"

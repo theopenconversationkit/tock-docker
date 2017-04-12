@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ This file is part of the tock-docker distribution.
+  ~ (https://github.com/voyages-sncf-technologies/tock-docker)
+  ~ Copyright (c) 2017 VSCT.
+  ~
+  ~ tock-corenlp is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as
+  ~ published by the Free Software Foundation, version 3.
+  ~
+  ~ tock-corenlp is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>fr.vsct.tock</groupId>
+        <artifactId>tock-root</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>tock-docker</artifactId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <plugin.docker>0.20.1</plugin.docker>
+    </properties>
+
+    <modules>
+        <module>duckling</module>
+        <module>nlp-build-model-worker</module>
+        <module>nlp-admin</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>fr.vsct.tock</groupId>
+                <artifactId>tock-nlp-duckling-service</artifactId>
+                <type>zip</type>
+                <classifier>dependencies</classifier>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.vsct.tock</groupId>
+                <artifactId>tock-nlp-admin-web</artifactId>
+                <type>zip</type>
+                <classifier>web</classifier>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.vsct.tock</groupId>
+                <artifactId>tock-nlp-admin-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.vsct.tock</groupId>
+                <artifactId>tock-nlp-build-model-worker</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.vsct.tock</groupId>
+                <artifactId>tock-nlp-api-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${plugin.docker}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${plugin.assembly}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <inceptionYear>2017</inceptionYear>
+    <organization>
+        <name>voyages-sncf-technologies</name>
+    </organization>
+    <developers>
+        <developer>
+            <id>jburet_vsct</id>
+            <name>Julien Buret</name>
+            <email>jburet@voyages-sncf.com</email>
+            <organization>voyages-sncf-technologies</organization>
+            <organizationUrl>https://www.voyages-sncf.com/</organizationUrl>
+        </developer>
+    </developers>
+    <licenses>
+        <license>
+            <name>GNU General Public License (GPL) version 3.0</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
+            <distribution>repo</distribution>
+            <comments/>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:voyages-sncf-technologies/tock-docker.git</connection>
+        <developerConnection>scm:git:git@github.com:voyages-sncf-technologies/tock-docker.git</developerConnection>
+        <url>git@github.com:voyages-sncf-technologies/tock-docker.git</url>
+        <tag>HEAD</tag>
+    </scm>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+</project>
