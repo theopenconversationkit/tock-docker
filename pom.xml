@@ -38,6 +38,7 @@
         <module>duckling</module>
         <module>nlp-build-model-worker</module>
         <module>nlp-admin</module>
+        <module>nlp-api</module>
     </modules>
 
     <dependencyManagement>
@@ -128,5 +129,19 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>maven-snapshots</id>
+            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>

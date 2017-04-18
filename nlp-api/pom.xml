@@ -57,7 +57,7 @@
                             </build>
                             <run>
                                 <ports>
-                                    <port>8080:8881</port>
+                                    <port>8081:8880</port>
                                 </ports>
                                 <log>
                                     <prefix>nlp_api</prefix>
