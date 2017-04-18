@@ -68,7 +68,7 @@
                             </build>
                             <run>
                                 <ports>
-                                    <port>8080:8889</port>
+                                    <port>8889:8080</port>
                                 </ports>
                                 <log>
                                     <prefix>duckling</prefix>
