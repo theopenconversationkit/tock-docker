@@ -12,13 +12,21 @@ You will need [Maven](https://maven.apache.org/) and [Git](https://git-scm.com/)
     mvn package docker:build
 ```
 
-## Start NLP administration interface
+## Run images
+
+Several docker-compose files are provided.
+
+### NLP stack
 
 ```sh 
     docker-compose up
 ``` 
 
-## Start Open Data Bot example
+And go to [http://localhost](http://localhost) to use the admin interface.
+
+### Open Data Bot example
+
+This docker-compose file starts the NLP stack with the [Open Data Bot](https://github.com/voyages-sncf-technologies/tock-bot-open-data). 
 
 * Edit the file [bot-open-data-variables.env](https://github.com/voyages-sncf-technologies/tock-docker/blob/master/bot-open-data-variables.env) and set the required env variables.
  
@@ -41,7 +49,7 @@ You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and a Messen
     tock_bot_open_data_webhook_verify_token=
 ``` 
 
-* Also to test the bot directly on your desktop, a secure tunnel (for example [ngrok](https://ngrok.com/)) is required:
+* Also to test the bot directly on your desktop, a secure ssl tunnel (for example [ngrok](https://ngrok.com/)) is required:
 
 ```sh 
     ngrok http 8080
@@ -53,7 +61,7 @@ You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and a Messen
     docker-compose -f docker-compose-bot-open-data.yml up
 ``` 
 
-* Take the ngrok value (ie  https://xxxx.ngrok.io ) and use it in the webhook interface of messenger settings to specify :
+* Take the ngrok value (ie  https://xxxx.ngrok.io ) and use it in the webhook interface of messenger settings, to specify :
    * the url : https://xxxx.ngrok.io/messenger
    * the verify token you set in tock_bot_open_data_webhook_verify_token env var
 
