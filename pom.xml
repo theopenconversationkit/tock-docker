@@ -39,6 +39,7 @@
         <module>nlp-build-model-worker</module>
         <module>nlp-admin</module>
         <module>nlp-api</module>
+        <module>bot-open-data</module>
     </modules>
 
     <dependencyManagement>
@@ -70,6 +71,11 @@
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-api-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.vsct.tock</groupId>
+                <artifactId>tock-bot-open-data</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
