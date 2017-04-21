@@ -22,7 +22,7 @@ You will need [Maven](https://maven.apache.org/) and [Git](https://git-scm.com/)
 
 * Edit the file [bot-open-data-variables.env](https://github.com/voyages-sncf-technologies/tock-docker/blob/master/bot-open-data-variables.env) and set the required env variables.
  
-You will need a (free) {SNCF Open Data key](https://data.sncf.com/) and a Messenger application (look at the [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/guides/quick-start)). 
+You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and a Messenger application (look at the [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/guides/quick-start)). 
 
 ```sh 
     #Sncf open data api user
@@ -55,6 +55,6 @@ You will need a (free) {SNCF Open Data key](https://data.sncf.com/) and a Messen
 
 * Take the ngrok value (ie  https://xxxx.ngrok.io ) and use it in the webhook interface of messenger settings to specify :
    * the url : https://xxxx.ngrok.io/messenger
-   * with the verify token you set in tock_bot_open_data_webhook_verify_token env var
+   * the verify token you set in tock_bot_open_data_webhook_verify_token env var
 
-You can start to talk to the bot!
+Now you can start to talk to the bot!
