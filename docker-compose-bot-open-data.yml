@@ -5,7 +5,7 @@ services:
   mongo:
     image: mongo:latest
     volumes:
-      - /data/db
+      - .tockmongo:/data/db
     ports:
       - "27017:27017"
     command: --smallfiles --rest
@@ -53,6 +53,8 @@ services:
       depends_on:
         - mongo
         - nlp_api
+      env_file:
+        - "bot-open-data-variables$BOTENV.env"
       environment:
         - tock_mongo_url=mongodb://mongo:27017
         - tock_nlp_service_url=http://nlp_api:8080

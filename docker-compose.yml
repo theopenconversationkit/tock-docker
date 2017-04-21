@@ -5,7 +5,7 @@ services:
   mongo:
     image: mongo:latest
     volumes:
-      - /data/db
+      - .tockmongo:/data/db
     ports:
       - "27017:27017"
     command: --smallfiles --rest
