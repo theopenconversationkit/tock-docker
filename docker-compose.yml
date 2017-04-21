@@ -33,7 +33,7 @@ services:
       - duckling
     environment:
       - tock_mongo_url=mongodb://mongo:27017
-      - nlp_entities_url=http://duckling:8080
+      - nlp_duckling_url=http://duckling:8080
     ports:
       - "80:8080"
 
@@ -44,6 +44,6 @@ services:
       - duckling
     environment:
       - tock_mongo_url=mongodb://mongo:27017
-      - nlp_entities_url=http://duckling:8080
+      - nlp_duckling_url=http://duckling:8080
     ports:
       - "8081:8080"
