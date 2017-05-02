@@ -21,17 +21,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>fr.vsct.tock</groupId>
-        <artifactId>tock-root</artifactId>
-        <version>0.1-SNAPSHOT</version>
-    </parent>
-
+    <groupId>fr.vsct.tock</groupId>
     <artifactId>tock-docker</artifactId>
+    <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
         <plugin.docker>0.20.1</plugin.docker>
+        <plugin.release>2.5.3</plugin.release>
+        <plugin.ant>1.8</plugin.ant>
+        <plugin.resources>3.0.2</plugin.resources>
     </properties>
 
     <modules>
@@ -87,6 +86,43 @@
     </dependencyManagement>
 
     <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${plugin.resources}</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>.env</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${plugin.release}</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <tagNameFormat>tock-@{project.version}</tagNameFormat>
+                    <goals>clean validate package docker:build docker:push</goals>
+                </configuration>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
