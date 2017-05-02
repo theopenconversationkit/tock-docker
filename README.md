@@ -2,35 +2,38 @@
 
 # Docker images for [Tock](https://github.com/voyages-sncf-technologies/tock)
 
-## Build images
-
-You will need [Maven](https://maven.apache.org/) and [Git](https://git-scm.com/).
-
-```sh 
-    git clone https://github.com/voyages-sncf-technologies/tock-docker.git
-    cd tock-docker
-    mvn package docker:build
-```
-
 ## Run images
 
-Several docker-compose files are provided.
+Several docker-compose files are available in the [Docker Hub](https://hub.docker.com/r/tock/).
 
-### NLP stack
+### Run the NLP stack
 
 ```sh 
+    #get the last docker-compose file
+    curl -o docker-compose.yml https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/docker-compose.yml
+    #get the last tag
+    curl -o .env https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/.env
+    #launch the stack
     docker-compose up
 ``` 
 
 And go to [http://localhost](http://localhost) to use the admin interface.
 
-### Open Data Bot example
+### Run the Open Data Bot example
 
 This docker-compose file starts the NLP stack with the [Open Data Bot](https://github.com/voyages-sncf-technologies/tock-bot-open-data). 
 
 * Edit the file [bot-open-data-variables.env](https://github.com/voyages-sncf-technologies/tock-docker/blob/master/bot-open-data-variables.env) and set the required env variables.
  
 You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and a Messenger application (look at the [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/guides/quick-start)). 
+
+```sh 
+    #get the file
+    curl -o bot-open-data-variables.env https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/bot-open-data-variables.env
+``` 
+
+Then edit the values:
+
 
 ```sh 
     #Sncf open data api user
@@ -58,6 +61,11 @@ You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and a Messen
 * Then run the bot
 
 ```sh 
+    #get the last docker compose file
+    curl -o docker-compose-bot-open-data.yml https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/docker-compose-bot-open-data.yml
+    #get the last tag
+    curl -o .env https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/.env
+    #launch the stack
     docker-compose -f docker-compose-bot-open-data.yml up
 ``` 
 
@@ -66,3 +74,13 @@ You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and a Messen
    * the verify token you set in tock_bot_open_data_webhook_verify_token env var
 
 Now you can start to talk to the bot!
+
+## Build images
+
+You will need [Maven](https://maven.apache.org/) and [Git](https://git-scm.com/).
+
+```sh 
+    git clone https://github.com/voyages-sncf-technologies/tock-docker.git
+    cd tock-docker
+    mvn package docker:build
+```    
