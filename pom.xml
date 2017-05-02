@@ -27,6 +27,8 @@
     <packaging>pom</packaging>
 
     <properties>
+        <tock>0.1-SNAPSHOT</tock>
+
         <plugin.docker>0.20.1</plugin.docker>
         <plugin.release>2.5.3</plugin.release>
         <plugin.ant>1.8</plugin.ant>
@@ -48,39 +50,39 @@
                 <artifactId>tock-nlp-duckling-service</artifactId>
                 <type>zip</type>
                 <classifier>dependencies</classifier>
-                <version>${project.version}</version>
+                <version>${tock}</version>
             </dependency>
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-admin-web</artifactId>
                 <type>zip</type>
                 <classifier>web</classifier>
-                <version>${project.version}</version>
+                <version>${tock}</version>
             </dependency>
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-admin-server</artifactId>
-                <version>${project.version}</version>
+                <version>${tock}</version>
             </dependency>
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-build-model-worker</artifactId>
-                <version>${project.version}</version>
+                <version>${tock}</version>
             </dependency>
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-api-service</artifactId>
-                <version>${project.version}</version>
+                <version>${tock}</version>
             </dependency>
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-bot-open-data</artifactId>
-                <version>${project.version}</version>
+                <version>${tock}</version>
             </dependency>
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-model-stanford</artifactId>
-                <version>${project.version}</version>
+                <version>${tock}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

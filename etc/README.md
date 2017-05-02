@@ -19,7 +19,7 @@ In the root directory of the project, run
 In the root directory of the project, run 
  
 ```sh 
-    etc/releaseAndDeploy.sh
+    etc/releaseAndDeploy.sh [release version]
 ```  
 
 
