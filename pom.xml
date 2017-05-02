@@ -26,7 +26,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <tock>0.1-SNAPSHOT</tock>
+        <tock>${project.version}</tock>
 
         <plugin.docker>0.20.1</plugin.docker>
         <plugin.release>2.5.3</plugin.release>
@@ -120,7 +120,8 @@
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <tagNameFormat>tock-@{project.version}</tagNameFormat>
-                    <goals>clean validate package docker:build docker:push</goals>
+                    <preparationGoals>clean validate</preparationGoals>
+                    <goals>package docker:build docker:push</goals>
                 </configuration>
             </plugin>
         </plugins>
