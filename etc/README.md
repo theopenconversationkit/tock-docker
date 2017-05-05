@@ -2,9 +2,8 @@
 
 ## Local configuration
 
-Copy/paste the contents of [etc/deploy-settings.xml](https://github.com/voyages-sncf-technologies/tock-corenlp/blob/master/etc/deploy-settings.xml)
- in your .m2/settings.xml - set the login/password of your sonatype account
- and the keyname and passpharse of your gpg key
+Copy/paste the contents of [etc/deploy-settings.xml](https://github.com/voyages-sncf-technologies/tock-docker/blob/master/etc/deploy-settings.xml)
+ in your .m2/settings.xml - set the login/password of your docker hub account
 
 ## How to deploy a snapshot
 
