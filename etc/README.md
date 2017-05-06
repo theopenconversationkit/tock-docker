@@ -10,7 +10,7 @@ Copy/paste the contents of [etc/deploy-settings.xml](https://github.com/voyages-
 In the root directory of the project, run 
  
 ```sh 
-    etc/deploySnapshot.sh
+    etc/pushSnapshot.sh
 ```  
 
 ## How to release and deploy a release
@@ -18,7 +18,7 @@ In the root directory of the project, run
 In the root directory of the project, run 
  
 ```sh 
-    etc/releaseAndDeploy.sh [release version]
+    etc/releaseAndPush.sh [release version]
 ```  
 
 
