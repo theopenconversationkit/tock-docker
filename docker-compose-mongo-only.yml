@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - .tockmongo:/data/db
+    ports:
+      - "27017:27017"
+    command: --smallfiles --rest
