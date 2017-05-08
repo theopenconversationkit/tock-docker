@@ -4,7 +4,9 @@
 
 ## Run images
 
-Several docker-compose files are available in the [Docker Hub](https://hub.docker.com/r/tock/).
+Several docker files are available in the [Docker Hub](https://hub.docker.com/r/tock/).
+
+This project contains the source to build and deploy the docker files, and also provides docker-compose files for the whole Tock stack.
 
 ### Run the NLP stack
 
