@@ -28,6 +28,8 @@
     <properties>
         <tock>${project.version}</tock>
 
+        <jackson>2.8.7</jackson>
+
         <plugin.docker>0.20.1</plugin.docker>
         <plugin.release>2.5.3</plugin.release>
         <plugin.ant>1.8</plugin.ant>
@@ -82,6 +84,27 @@
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-model-stanford</artifactId>
                 <version>${tock}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-kotlin</artifactId>
+                <version>${jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
