@@ -61,7 +61,7 @@
                                     </inline>
                                 </assembly>
                                 <cmd>
-                                    <shell>java -cp '/maven/*' fr.vsct.tock.duckling.service.StartServerKt</shell>
+                                    <shell>java -Dfile.encoding=UTF-8 -cp '/maven/*' fr.vsct.tock.duckling.service.StartServerKt</shell>
                                 </cmd>
                             </build>
                             <run>

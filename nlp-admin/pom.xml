@@ -81,7 +81,7 @@
                                     </inline>
                                 </assembly>
                                 <cmd>
-                                    <shell>java -cp '/maven/*' fr.vsct.tock.nlp.admin.StartAdminServerKt</shell>
+                                    <shell>java -Dfile.encoding=UTF-8 -cp '/maven/*' fr.vsct.tock.nlp.admin.StartAdminServerKt</shell>
                                 </cmd>
                             </build>
                             <run>

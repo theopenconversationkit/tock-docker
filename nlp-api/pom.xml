@@ -54,7 +54,7 @@
                                     <descriptorRef>artifact-with-dependencies</descriptorRef>
                                 </assembly>
                                 <cmd>
-                                    <shell>java -cp '/maven/*' fr.vsct.tock.nlp.api.StartNlpServiceKt</shell>
+                                    <shell>java -Dfile.encoding=UTF-8 -cp '/maven/*' fr.vsct.tock.nlp.api.StartNlpServiceKt</shell>
                                 </cmd>
                             </build>
                             <run>

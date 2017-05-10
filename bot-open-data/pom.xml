@@ -50,7 +50,7 @@
                                     <descriptorRef>artifact-with-dependencies</descriptorRef>
                                 </assembly>
                                 <cmd>
-                                    <shell>java -cp '/maven/*' fr.vsct.tock.bot.open.data.StartKt</shell>
+                                    <shell>java -Dfile.encoding=UTF-8 -cp '/maven/*' fr.vsct.tock.bot.open.data.StartKt</shell>
                                 </cmd>
                             </build>
                             <run>
