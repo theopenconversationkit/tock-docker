@@ -19,8 +19,6 @@ services:
 
   duckling:
     image: tock/duckling:$TAG
-    depends_on:
-      - mongo
     environment:
       - tock_mongo_url=mongodb://mongo:27017
     expose:
