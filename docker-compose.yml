@@ -25,7 +25,7 @@ services:
       - "8080"
 
   admin_web:
-    image: tock/nlp_admin:$TAG
+    image: tock/bot_admin:$TAG
     depends_on:
       - mongo
       - duckling

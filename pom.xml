@@ -42,6 +42,7 @@
         <module>nlp-build-model-worker</module>
         <module>nlp-admin</module>
         <module>nlp-api</module>
+        <module>bot-admin</module>
         <module>bot-open-data</module>
     </modules>
 
@@ -64,6 +65,18 @@
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-admin-server</artifactId>
+                <version>${tock}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.vsct.tock</groupId>
+                <artifactId>tock-bot-admin-web</artifactId>
+                <type>zip</type>
+                <classifier>web</classifier>
+                <version>${tock}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.vsct.tock</groupId>
+                <artifactId>tock-bot-admin-server</artifactId>
                 <version>${tock}</version>
             </dependency>
             <dependency>

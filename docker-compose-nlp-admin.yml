@@ -9,7 +9,7 @@ services:
     ports:
       - "27017:27017"
     command: --smallfiles --rest
-
+    
   build_worker:
     image: tock/build_worker:$TAG
     depends_on:
@@ -25,7 +25,7 @@ services:
       - "8080"
 
   admin_web:
-    image: tock/bot_admin:$TAG
+    image: tock/nlp_admin:$TAG
     depends_on:
       - mongo
       - duckling
@@ -43,18 +43,5 @@ services:
     environment:
       - tock_mongo_url=mongodb://mongo:27017
       - nlp_duckling_url=http://duckling:8080
-    expose:
-      - "8080"
-
-  bot_open_data:
-      image: tock/bot_open_data:$TAG
-      depends_on:
-        - mongo
-        - nlp_api
-      env_file:
-        - "bot-open-data-variables$BOTENV.env"
-      environment:
-        - tock_mongo_url=mongodb://mongo:27017
-        - tock_nlp_service_url=http://nlp_api:8080
-      ports:
-        - "8080:8080"
+    ports:
+      - "8888:8080"
