@@ -27,7 +27,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tock>${project.version}</tock>
+        <tock>0.2.6</tock>
+        <bot-open-data>${project.version}</bot-open-data>
+        <stanford>${project.version}</stanford>
 
         <jackson>2.8.7</jackson>
 
@@ -92,12 +94,12 @@
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-bot-open-data</artifactId>
-                <version>${tock}</version>
+                <version>${bot-open-data}</version>
             </dependency>
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-model-stanford</artifactId>
-                <version>${tock}</version>
+                <version>${stanford}</version>
             </dependency>
 
             <dependency>
