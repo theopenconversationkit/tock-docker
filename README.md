@@ -21,13 +21,15 @@ This project contains the source to build and deploy the docker files, and also 
 
 And go to [http://localhost](http://localhost) to use the admin interface.
 
+The default login/password is admin@vsct.fr/password.
+
 ### Run the Open Data Bot example
 
 This docker-compose file starts the NLP stack with the [Open Data Bot](https://github.com/voyages-sncf-technologies/tock-bot-open-data). 
 
 * Edit the file [bot-open-data-variables.env](https://github.com/voyages-sncf-technologies/tock-docker/blob/master/bot-open-data-variables.env) and set the required env variables.
  
-You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and a Messenger application (look at the [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/guides/quick-start)). 
+You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and a Messenger application with "messages" and "messaging_postbacks" webhook events activated (look at the [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/guides/quick-start)). 
 
 ```sh 
     #get the file
