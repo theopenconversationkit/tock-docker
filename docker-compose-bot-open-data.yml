@@ -16,11 +16,13 @@ services:
       - mongo
     environment:
       - tock_mongo_url=mongodb://mongo:27017
+      - tock_env=prod
 
   duckling:
     image: tock/duckling:$TAG
     environment:
       - tock_mongo_url=mongodb://mongo:27017
+      - tock_env=prod
     expose:
       - "8080"
 
@@ -32,6 +34,7 @@ services:
     environment:
       - tock_mongo_url=mongodb://mongo:27017
       - nlp_duckling_url=http://duckling:8080
+      - tock_env=prod
     ports:
       - "80:8080"
 
@@ -43,6 +46,7 @@ services:
     environment:
       - tock_mongo_url=mongodb://mongo:27017
       - nlp_duckling_url=http://duckling:8080
+      - tock_env=prod
     expose:
       - "8080"
 
@@ -56,5 +60,6 @@ services:
       environment:
         - tock_mongo_url=mongodb://mongo:27017
         - tock_nlp_service_url=http://nlp_api:8080
+        - tock_env=prod
       ports:
         - "8080:8080"

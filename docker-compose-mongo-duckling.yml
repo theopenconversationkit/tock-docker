@@ -14,5 +14,6 @@ services:
       image: tock/duckling:$TAG
       environment:
         - tock_mongo_url=mongodb://mongo:27017
+        - tock_env=prod
       ports:
         - "8889:8080"
