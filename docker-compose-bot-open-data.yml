@@ -35,6 +35,7 @@ services:
       - tock_mongo_url=mongodb://mongo:27017
       - nlp_duckling_url=http://duckling:8080
       - tock_env=prod
+      - tock_bot_admin_rest_default_base_url=http://bot_open_data:8080
     ports:
       - "80:8080"
 
