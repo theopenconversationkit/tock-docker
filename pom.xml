@@ -27,15 +27,14 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tock>0.2.8-SNAPSHOT</tock>
+        <tock>0.2.10-SNAPSHOT</tock>
         <bot-open-data>${project.version}</bot-open-data>
         <stanford>${project.version}</stanford>
 
-        <jackson>2.8.7</jackson>
+        <jackson>2.8.9</jackson>
 
-        <plugin.docker>0.20.1</plugin.docker>
+        <plugin.docker>0.21.0</plugin.docker>
         <plugin.release>2.5.3</plugin.release>
-        <plugin.ant>1.8</plugin.ant>
         <plugin.resources>3.0.2</plugin.resources>
     </properties>
 
@@ -94,12 +93,12 @@
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-bot-open-data</artifactId>
-                <version>0.2.1-SNAPSHOT</version>
+                <version>${bot-open-data}</version>
             </dependency>
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-model-stanford</artifactId>
-                <version>0.2.1-SNAPSHOT</version>
+                <version>${stanford}</version>
             </dependency>
 
             <dependency>
