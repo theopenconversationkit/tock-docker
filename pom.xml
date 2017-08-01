@@ -22,14 +22,14 @@
 
     <groupId>fr.vsct.tock</groupId>
     <artifactId>tock-docker</artifactId>
-    <version>0.3.2-SNAPSHOT</version>
+    <version>0.3.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tock>0.2.10-SNAPSHOT</tock>
-        <bot-open-data>${project.version}</bot-open-data>
-        <stanford>${project.version}</stanford>
+        <tock>0.3.3-SNAPSHOT</tock>
+        <bot-open-data>0.3.2-SNAPSHOT</bot-open-data>
+        <stanford>0.3.2-SNAPSHOT</stanford>
 
         <jackson>2.8.9</jackson>
 
@@ -93,12 +93,12 @@
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-bot-open-data</artifactId>
-                <version>0.3.2-SNAPSHOT</version>
+                <version>${bot-open-data}</version>
             </dependency>
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-model-stanford</artifactId>
-                <version>0.3.2-SNAPSHOT</version>
+                <version>${stanford}</version>
             </dependency>
 
             <dependency>
