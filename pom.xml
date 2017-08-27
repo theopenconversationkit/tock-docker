@@ -33,7 +33,7 @@
 
         <jackson>2.8.9</jackson>
 
-        <plugin.docker>0.21.0</plugin.docker>
+        <plugin.docker>0.22.0</plugin.docker>
         <plugin.release>2.5.3</plugin.release>
         <plugin.resources>3.0.2</plugin.resources>
     </properties>
