@@ -27,9 +27,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tock>0.3.3-SNAPSHOT</tock>
-        <bot-open-data>0.3.2-SNAPSHOT</bot-open-data>
-        <stanford>0.3.2-SNAPSHOT</stanford>
+        <tock>0.4.0</tock>
+        <bot-open-data>0.4.0</bot-open-data>
+        <stanford>0.4.0</stanford>
 
         <jackson>2.8.9</jackson>
 
