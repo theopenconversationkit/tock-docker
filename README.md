@@ -78,9 +78,11 @@ Then edit the values:
     docker-compose -f docker-compose-bot-open-data.yml up
 ``` 
 
-* Take the ngrok value (ie  https://xxxx.ngrok.io ) and use it in the webhook interface of messenger settings, to specify :
-   * the url : https://xxxx.ngrok.io/messenger
-   * the verify token you set in tock_bot_open_data_webhook_verify_token env var
+* Take the ngrok value (ie  https://xxxx.ngrok.io ) and use it 
+   * In the webhook interface of Messenger settings, to specify :
+        * the url : https://xxxx.ngrok.io/messenger
+        * the verify token you set in tock_bot_open_data_webhook_verify_token env var
+   * In the Google Assistant project file      
 
 Now you can start to talk to the bot!
 
