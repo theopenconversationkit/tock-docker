@@ -29,7 +29,12 @@ This docker-compose file starts the NLP stack with the [Open Data Bot](https://g
 
 * Edit the file [bot-open-data-variables.env](https://github.com/voyages-sncf-technologies/tock-docker/blob/master/bot-open-data-variables.env) and set the required env variables.
  
-You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and a Messenger application with "messages" and "messaging_postbacks" webhook events activated (look at the [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/guides/quick-start)). 
+You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and
+ 
+   * optionally a Messenger application with "messages" and "messaging_postbacks" webhook events activated (look at the [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/guides/quick-start)). 
+
+   * optionally a Google Assistant project (see https://developers.google.com/actions/sdk/create-a-project ) - sample project file here: [google_actions_fr.json](https://raw.githubusercontent.com/voyages-sncf-technologies/tock-bot-open-data/master/src/main/resources/google_actions_fr.json)
+ 
 
 ```sh 
     #get the file
