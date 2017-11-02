@@ -22,16 +22,16 @@
 
     <groupId>fr.vsct.tock</groupId>
     <artifactId>tock-docker</artifactId>
-    <version>0.6.1-SNAPSHOT</version>
+    <version>0.7.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tock>0.6.6-SNAPSHOT</tock>
-        <bot-open-data>0.6.1-SNAPSHOT</bot-open-data>
-        <stanford>0.6.1-SNAPSHOT</stanford>
+        <tock>0.7.0-SNAPSHOT</tock>
+        <bot-open-data>0.7.0-SNAPSHOT</bot-open-data>
+        <stanford>0.7.0-SNAPSHOT</stanford>
 
-        <jackson>2.9.1</jackson>
+        <jackson>2.9.2</jackson>
 
         <plugin.docker>0.22.0</plugin.docker>
         <plugin.release>2.5.3</plugin.release>
