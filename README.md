@@ -21,7 +21,7 @@ This project contains the source to build and deploy the docker files, and also 
 
 And go to [http://localhost](http://localhost) to use the admin interface.
 
-The default login/password is admin@vsct.fr/password.
+The default login/password is admin@app.com/password.
 
 ### Run the Open Data Bot example
 
