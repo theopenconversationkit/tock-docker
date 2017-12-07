@@ -8,7 +8,7 @@ services:
       - .tockmongo:/data/db
     ports:
       - "27017:27017"
-    command: --smallfiles --rest
+    command: --smallfiles --bind_ip_all
     
   build_worker:
     image: tock/build_worker:$TAG
@@ -21,7 +21,6 @@ services:
   duckling:
     image: tock/duckling:$TAG
     environment:
-      - tock_mongo_url=mongodb://mongo:27017
       - tock_env=prod
     expose:
       - "8080"
@@ -50,3 +49,4 @@ services:
       - tock_env=prod
     ports:
       - "8888:8080"
+

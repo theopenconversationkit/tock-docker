@@ -8,7 +8,7 @@ services:
       - .tockmongo:/data/db
     ports:
       - "27017:27017"
-    command: --smallfiles --rest
+    command: --smallfiles --bind_ip_all
 
   build_worker:
     image: tock/build_worker:$TAG
@@ -48,7 +48,7 @@ services:
       - nlp_duckling_url=http://duckling:8080
       - tock_env=prod
     expose:
-      - "8080"
+      - "8888:8080"
 
   bot_open_data:
       image: tock/bot_open_data:$TAG

@@ -8,7 +8,7 @@ services:
       - .tockmongo:/data/db
     ports:
       - "27017:27017"
-    command: --smallfiles --rest
+    command: --smallfiles --bind_ip_all
     
   duckling:
       image: tock/duckling:$TAG
