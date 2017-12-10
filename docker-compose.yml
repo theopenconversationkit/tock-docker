@@ -47,6 +47,9 @@ services:
       - tock_mongo_url=mongodb://mongo:27017
       - nlp_duckling_url=http://duckling:8080
       - tock_env=prod
+      - tock_web_use_default_cors_handler=true
+      - tock_web_use_default_cors_handler_with_credentials=false
+      - tock_web_use_default_cors_handler_url=*
     ports:
       - "8888:8080"
 

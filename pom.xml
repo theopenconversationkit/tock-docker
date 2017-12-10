@@ -66,6 +66,13 @@
             </dependency>
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
+                <artifactId>tock-nlp-api-doc</artifactId>
+                <type>zip</type>
+                <classifier>web</classifier>
+                <version>${tock}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-admin-server</artifactId>
                 <version>${tock}</version>
             </dependency>
