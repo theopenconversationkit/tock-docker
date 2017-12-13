@@ -61,7 +61,7 @@ Then edit the values:
     tock_bot_open_data_webhook_verify_token=
 ``` 
 
-* Also to test the bot directly on your desktop, a secure ssl tunnel (for example [ngrok](https://ngrok.com/)) is required:
+* Also to test the bot with Messenger or Google Assistant, a secure ssl tunnel (for example [ngrok](https://ngrok.com/)) is required:
 
 ```sh 
     ngrok http 8080
