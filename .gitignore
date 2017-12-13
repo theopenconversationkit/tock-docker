@@ -26,3 +26,6 @@ target
 .DS_Store
 Thumbs.db
 .tockmongo
+
+#env dev
+bot-open-data-variablesDEV.env

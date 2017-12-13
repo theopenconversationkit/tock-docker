@@ -50,7 +50,7 @@ services:
       - tock_web_use_default_cors_handler=true
       - tock_web_use_default_cors_handler_with_credentials=false
       - tock_web_use_default_cors_handler_url=*
-    expose:
+    ports:
       - "8888:8080"
 
   bot_open_data:
