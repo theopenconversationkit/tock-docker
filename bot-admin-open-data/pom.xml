@@ -63,7 +63,7 @@
                         <image>
                             <name>tock/bot_admin_open_data:${project.version}</name>
                             <build>
-                                <from>java:8</from>
+                                <from>openjdk:8</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>

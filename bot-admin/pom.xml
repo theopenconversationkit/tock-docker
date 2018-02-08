@@ -65,7 +65,7 @@
                         <image>
                             <name>tock/bot_admin:${project.version}</name>
                             <build>
-                                <from>java:8</from>
+                                <from>openjdk:8</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>
