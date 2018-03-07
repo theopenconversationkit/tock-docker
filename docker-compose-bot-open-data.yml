@@ -30,6 +30,7 @@ services:
     image: tock/kotlin_compiler:$TAG
     environment:
       - tock_env=prod
+      - tock_kotlin_compiler_classpath=/maven
     expose:
       - "8080"
 
