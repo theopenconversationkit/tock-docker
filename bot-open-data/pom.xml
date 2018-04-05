@@ -45,7 +45,7 @@
                         <image>
                             <name>tock/bot_open_data:${project.version}</name>
                             <build>
-                                <from>openjdk:9</from>
+                                <from>openjdk:10</from>
                                 <assembly>
                                     <descriptorRef>artifact-with-dependencies</descriptorRef>
                                 </assembly>
