@@ -31,9 +31,11 @@ This docker-compose file starts the NLP stack with the [Open Data Bot](https://g
  
 You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and
  
-   * optionally a Messenger application with "messages" and "messaging_postbacks" webhook events activated (look at the [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/guides/quick-start)). 
+   * optionally a Messenger application with "messages" and "messaging_postbacks" webhook events activated - look at the [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) 
+   and [Tock Messenger Configuration](https://github.com/voyages-sncf-technologies/tock/tree/master/bot/connector-messenger) instructions. 
 
    * optionally a Google Assistant project (see https://developers.google.com/actions/sdk/create-a-project ) - sample project file here: [google_actions_fr.json](https://raw.githubusercontent.com/voyages-sncf-technologies/tock-bot-open-data/master/src/main/resources/google_actions_fr.json)
+   Look at [Tock Google Assistant configuration](https://github.com/voyages-sncf-technologies/tock/tree/master/bot/connector-ga).
  
 
 ```sh 
@@ -47,18 +49,6 @@ Then edit the values:
 ```sh 
     #Sncf open data api user
     tock_bot_open_data_sncf_api_user=
-
-    #facebook page id
-    tock_bot_open_data_page_id=
-
-    #messenger page token
-    tock_bot_open_data_page_token=
-
-    #messenger application secret key
-    tock_bot_open_data_application_secret=
-
-    #facebook webhook verify token
-    tock_bot_open_data_webhook_verify_token=
 ``` 
 
 * Also to test the bot with Messenger or Google Assistant, a secure ssl tunnel (for example [ngrok](https://ngrok.com/)) is required:
