@@ -33,7 +33,7 @@ services:
 
   mongo-setup:
     container_name: "mongo-setup"
-    image: mongo
+    image: mongo:latest
     depends_on:
       - "mongo"
       - "mongo2"
@@ -55,6 +55,8 @@ services:
     image: tock/build_worker:$TAG
     depends_on:
       - mongo
+      - mongo2
+      - mongo3
     environment:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27017,mongo3:27017/?replicaSet=tock
       - tock_env=prod
@@ -79,6 +81,8 @@ services:
     image: tock/bot_admin_open_data:$TAG
     depends_on:
       - mongo
+      - mongo2
+      - mongo3
       - duckling
       - kotlin_compiler
     environment:
@@ -93,6 +97,8 @@ services:
     image: tock/nlp_api:$TAG
     depends_on:
       - mongo
+      - mongo2
+      - mongo3
       - duckling
     environment:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27017,mongo3:27017/?replicaSet=tock
@@ -105,16 +111,18 @@ services:
       - "8888:8080"
 
   bot_open_data:
-      image: tock/bot_open_data:$TAG
-      depends_on:
-        - mongo
-        - nlp_api
-      env_file:
-        - "bot-open-data-variables$BOTENV.env"
-      environment:
-        - tock_mongo_url=mongodb://mongo:27017,mongo2:27017,mongo3:27017/?replicaSet=tock
-        - tock_nlp_service_url=http://nlp_api:8080
-        - tock_env=prod
-        - tock_configuration_bot_default_base_url=http://bot_open_data:8080
-      ports:
-        - "8080:8080"
+    image: tock/bot_open_data:$TAG
+    depends_on:
+      - mongo
+      - mongo2
+      - mongo3
+      - nlp_api
+    env_file:
+      - "bot-open-data-variables$BOTENV.env"
+    environment:
+      - tock_mongo_url=mongodb://mongo:27017,mongo2:27017,mongo3:27017/?replicaSet=tock
+      - tock_nlp_service_url=http://nlp_api:8080
+      - tock_env=prod
+      - tock_configuration_bot_default_base_url=http://bot_open_data:8080
+    ports:
+      - "8080:8080"

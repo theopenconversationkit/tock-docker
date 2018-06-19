@@ -11,6 +11,14 @@ until mongo --host ${mongodb1}:${port} --eval 'quit(db.runCommand({ ping: 1 }).o
   printf '.'
   sleep 1
 done
+until mongo --host ${mongodb2}:${port} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
+  printf '.'
+  sleep 1
+done
+until mongo --host ${mongodb3}:${port} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
+  printf '.'
+  sleep 1
+done
 
 echo "Started.."
 

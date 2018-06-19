@@ -33,7 +33,7 @@ services:
 
   mongo-setup:
     container_name: "mongo-setup"
-    image: mongo
+    image: mongo:latest
     depends_on:
       - "mongo"
       - "mongo2"
@@ -55,6 +55,8 @@ services:
     image: tock/build_worker:$TAG
     depends_on:
       - mongo
+      - mongo2
+      - mongo3
     environment:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27017,mongo3:27017/?replicaSet=tock
       - tock_env=prod
@@ -78,6 +80,8 @@ services:
     image: tock/bot_admin:$TAG
     depends_on:
       - mongo
+      - mongo2
+      - mongo3
       - duckling
       - kotlin_compiler
     environment:
@@ -93,6 +97,8 @@ services:
     image: tock/nlp_api:$TAG
     depends_on:
       - mongo
+      - mongo2
+      - mongo3
       - duckling
     environment:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27017,mongo3:27017/?replicaSet=tock

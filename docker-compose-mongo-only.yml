@@ -33,7 +33,7 @@ services:
 
   mongo-setup:
     container_name: "mongo-setup"
-    image: mongo
+    image: mongo:latest
     depends_on:
       - "mongo"
       - "mongo2"
