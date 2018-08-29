@@ -14,6 +14,8 @@ This project contains the source to build and deploy the docker files, and also 
 ```sh 
     #get the last docker-compose file
     curl -o docker-compose.yml https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/docker-compose.yml
+    #get the script to start mongo in replicaset mode
+    mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
     #get the last tag
     curl -o .env https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/.env
     #launch the stack
@@ -63,6 +65,8 @@ Then edit the values:
 ```sh 
     #get the last docker compose file
     curl -o docker-compose-bot-open-data.yml https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/docker-compose-bot-open-data.yml
+    #get the script to start mongo in replicaset mode
+    mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
     #get the last tag
     curl -o .env https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/.env
     #launch the stack
