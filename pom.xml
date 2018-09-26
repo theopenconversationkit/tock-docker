@@ -31,7 +31,7 @@
         <bot-open-data>1.2.2-SNAPSHOT</bot-open-data>
         <stanford>1.2.2-SNAPSHOT</stanford>
 
-        <jackson>2.9.3</jackson>
+        <jackson>2.9.7</jackson>
 
         <plugin.docker>0.22.0</plugin.docker>
         <plugin.release>2.5.3</plugin.release>

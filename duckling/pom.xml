@@ -47,7 +47,7 @@
                         <image>
                             <name>tock/duckling:${project.version}</name>
                             <build>
-                                <from>openjdk:10</from>
+                                <from>openjdk:11</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>
