@@ -5,7 +5,7 @@ services:
   mongo:
     image: mongo:3.6.5
     volumes:
-      - .tockmongo:/data/db
+      - tockmongo:/data/db
     ports:
       - "27017:27017"
     command: --smallfiles --bind_ip_all --port 27017 --replSet "tock"
@@ -15,7 +15,7 @@ services:
     depends_on:
       - mongo
     volumes:
-      - .tockmongo2:/data/db
+      - tockmongo2:/data/db
     ports:
       - "27018:27017"
     command: --smallfiles --bind_ip_all --port 27017 --replSet "tock"
@@ -26,7 +26,7 @@ services:
       - mongo
       - mongo2
     volumes:
-      - .tockmongo3:/data/db
+      - tockmongo3:/data/db
     ports:
       - "27019:27017"
     command: --smallfiles --bind_ip_all --port 27017 --replSet "tock"
@@ -90,6 +90,7 @@ services:
       - nlp_duckling_url=http://duckling:8080
       - tock_env=prod
       - tock_bot_compiler_service_url=http://kotlin_compiler:8080
+      - tock_configuration_bot_default_base_url=http://bot_open_data:8080
     ports:
       - "80:8080"
 
@@ -126,3 +127,8 @@ services:
       - tock_configuration_bot_default_base_url=http://bot_open_data:8080
     ports:
       - "8080:8080"
+
+volumes:
+  tockmongo:
+  tockmongo2:
+  tockmongo3:
