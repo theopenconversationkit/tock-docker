@@ -91,6 +91,7 @@ services:
       - tock_env=prod
       - tock_bot_compiler_service_url=http://kotlin_compiler:8080
       - tock_configuration_bot_default_base_url=http://bot_open_data:8080
+      - botadminverticle_body_limit=-1
     ports:
       - "80:8080"
 

@@ -80,6 +80,7 @@ services:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27017,mongo3:27017/?replicaSet=tock
       - nlp_duckling_url=http://duckling:8080
       - tock_env=prod
+      - adminverticle_body_limit=-1
     ports:
       - "80:8080"
 
