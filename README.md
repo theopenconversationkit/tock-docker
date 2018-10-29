@@ -9,6 +9,15 @@ Several docker files are available in the [Docker Hub](https://hub.docker.com/r/
 
 This project contains the source to build and deploy the docker files, and also provides docker-compose files for the whole Tock stack.
 
+
+### Windows users
+
+- Windows users, you need to run dos2unix to format the mongo setup script first:
+
+```sh
+dos2unix ./scripts/setup.sh
+```
+
 ### Run the NLP stack
 
 ```sh 
@@ -25,6 +34,18 @@ This project contains the source to build and deploy the docker files, and also 
 And go to [http://localhost](http://localhost) to use the admin interface.
 
 The default login/password is admin@app.com/password.
+
+### Connect to the mongo database from an IDE
+
+In order to reach the mongo database from a client 
+(if you run the bot in Intellij Idea for example), you need to add in your /etc/hosts
+ (C:\windows\system32\drivers\etc\hosts for windows) these lines:
+ 
+```sh
+127.0.0.1 mongo
+127.0.0.1 mongo2
+127.0.0.1 mongo3
+``` 
 
 ### Run the Open Data Bot example
 

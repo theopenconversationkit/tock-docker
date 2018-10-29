@@ -17,8 +17,8 @@ services:
     volumes:
       - tockmongo2:/data/db
     ports:
-      - "27018:27017"
-    command: --smallfiles --bind_ip_all --port 27017 --replSet "tock"
+      - "27018:27018"
+    command: --smallfiles --bind_ip_all --port 27018 --replSet "tock"
 
   mongo3:
     image: mongo:3.6.5
@@ -28,8 +28,8 @@ services:
     volumes:
       - tockmongo3:/data/db
     ports:
-      - "27019:27017"
-    command: --smallfiles --bind_ip_all --port 27017 --replSet "tock"
+      - "27019:27019"
+    command: --smallfiles --bind_ip_all --port 27019 --replSet "tock"
 
   mongo-setup:
     container_name: "mongo-setup"

@@ -17,8 +17,8 @@ services:
     volumes:
       - tockmongo2:/data/db
     ports:
-      - "27018:27017"
-    command: --smallfiles --bind_ip_all --port 27017 --replSet "tock"
+      - "27018:27018"
+    command: --smallfiles --bind_ip_all --port 27018 --replSet "tock"
 
   mongo3:
     image: mongo:3.6.5
@@ -28,8 +28,8 @@ services:
     volumes:
       - tockmongo3:/data/db
     ports:
-      - "27019:27017"
-    command: --smallfiles --bind_ip_all --port 27017 --replSet "tock"
+      - "27019:27019"
+    command: --smallfiles --bind_ip_all --port 27019 --replSet "tock"
 
   mongo-setup:
     container_name: "mongo-setup"
@@ -58,7 +58,7 @@ services:
       - mongo2
       - mongo3
     environment:
-      - tock_mongo_url=mongodb://mongo:27017,mongo2:27017,mongo3:27017/?replicaSet=tock
+      - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
       - tock_env=prod
 
   duckling:
@@ -85,7 +85,7 @@ services:
       - duckling
       - kotlin_compiler
     environment:
-      - tock_mongo_url=mongodb://mongo:27017,mongo2:27017,mongo3:27017/?replicaSet=tock
+      - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
       - nlp_duckling_url=http://duckling:8080
       - tock_env=prod
       - tock_bot_admin_rest_default_base_url=http://bot_open_data:8080
@@ -102,7 +102,7 @@ services:
       - mongo3
       - duckling
     environment:
-      - tock_mongo_url=mongodb://mongo:27017,mongo2:27017,mongo3:27017/?replicaSet=tock
+      - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
       - nlp_duckling_url=http://duckling:8080
       - tock_env=prod
       - tock_web_use_default_cors_handler=true

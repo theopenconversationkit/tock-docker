@@ -1,21 +1,23 @@
 #!/bin/bash
 
-mongodb1=`getent hosts ${MONGO1} | awk '{ print $1 }'`
-mongodb2=`getent hosts ${MONGO2} | awk '{ print $1 }'`
-mongodb3=`getent hosts ${MONGO3} | awk '{ print $1 }'`
+mongodb1=${HOST1:-mongo}
+mongodb2=${HOST2:-mongo2}
+mongodb3=${HOST3:-mongo3}
 
-port=${PORT:-27017}
+port1=${PORT1:-27017}
+port2=${PORT2:-27018}
+port3=${PORT3:-27019}
 
 echo "Waiting for startup.."
-until mongo --host ${mongodb1}:${port} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
+until mongo --host ${mongodb1}:${port1} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
   printf '.'
   sleep 1
 done
-until mongo --host ${mongodb2}:${port} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
+until mongo --host ${mongodb2}:${port2} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
   printf '.'
   sleep 1
 done
-until mongo --host ${mongodb3}:${port} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
+until mongo --host ${mongodb3}:${port3} --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' &>/dev/null; do
   printf '.'
   sleep 1
 done
@@ -23,21 +25,21 @@ done
 echo "Started.."
 
 echo setup.sh time now: `date +"%T" `
-mongo --host ${mongodb1}:${port} <<EOF
+mongo --host ${mongodb1}:${port1} <<EOF
    var cfg = {
         "_id": "${RS}",
         "members": [
             {
                 "_id": 0,
-                "host": "${mongodb1}:${port}"
+                "host": "${mongodb1}:${port1}"
             },
             {
                 "_id": 1,
-                "host": "${mongodb2}:${port}"
+                "host": "${mongodb2}:${port2}"
             },
             {
                 "_id": 2,
-                "host": "${mongodb3}:${port}"
+                "host": "${mongodb3}:${port3}"
             }
         ]
     };
