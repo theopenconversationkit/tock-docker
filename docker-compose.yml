@@ -60,6 +60,7 @@ services:
     environment:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
       - tock_env=prod
+      - JAVA_ARGS=-Xmx1g
 
   duckling:
     image: tock/duckling:$TAG

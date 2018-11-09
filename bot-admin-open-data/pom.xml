@@ -89,7 +89,7 @@
                                     </inline>
                                 </assembly>
                                 <cmd>
-                                    <shell>java -Dfile.encoding=UTF-8 -Dtock_nlp_model_refresh_rate=10 -cp '/maven/*' fr.vsct.tock.bot.admin.StartBotAdminServerKt</shell>
+                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dtock_nlp_model_refresh_rate=10 -cp '/maven/*' fr.vsct.tock.bot.admin.StartBotAdminServerKt</shell>
                                 </cmd>
                             </build>
                             <run>
