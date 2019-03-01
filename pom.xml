@@ -17,13 +17,12 @@
   ~ along with this program. If not, see <http://www.gnu.org/licenses />.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.vsct.tock</groupId>
     <artifactId>tock-docker</artifactId>
-    <version>2.0.2-SNAPSHOT</version>
+    <version>2.0.2</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -232,7 +231,7 @@
             <name>GNU General Public License (GPL) version 3.0</name>
             <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
             <distribution>repo</distribution>
-            <comments/>
+            <comments />
         </license>
     </licenses>
 
@@ -240,7 +239,7 @@
         <connection>scm:git:git@github.com:voyages-sncf-technologies/tock-docker.git</connection>
         <developerConnection>scm:git:git@github.com:voyages-sncf-technologies/tock-docker.git</developerConnection>
         <url>git@github.com:voyages-sncf-technologies/tock-docker.git</url>
-        <tag>HEAD</tag>
+        <tag>tock-2.0.2</tag>
     </scm>
     <distributionManagement>
         <snapshotRepository>
