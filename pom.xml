@@ -17,7 +17,8 @@
   ~ along with this program. If not, see <http://www.gnu.org/licenses />.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.vsct.tock</groupId>
@@ -32,6 +33,7 @@
         <stanford>2.0.2-SNAPSHOT</stanford>
 
         <jackson>2.9.8</jackson>
+        <okhttp>3.13.1</okhttp>
 
         <plugin.docker>0.27.2</plugin.docker>
         <plugin.release>2.5.3</plugin.release>
@@ -140,6 +142,16 @@
                 <artifactId>jackson-datatype-jsr310</artifactId>
                 <version>${jackson}</version>
             </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>logging-interceptor</artifactId>
+                <version>${okhttp}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -215,7 +227,7 @@
             <name>GNU General Public License (GPL) version 3.0</name>
             <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
             <distribution>repo</distribution>
-            <comments />
+            <comments/>
         </license>
     </licenses>
 
