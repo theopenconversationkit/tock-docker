@@ -34,7 +34,6 @@
 
         <jackson>2.9.8</jackson>
         <okhttp>3.13.1</okhttp>
-        <signpost-core>1.2.1.2</signpost-core>
 
         <plugin.docker>0.27.2</plugin.docker>
         <plugin.release>2.5.3</plugin.release>
@@ -157,11 +156,6 @@
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>logging-interceptor</artifactId>
                 <version>${okhttp}</version>
-            </dependency>
-            <dependency>
-                <groupId>oauth.signpost</groupId>
-                <artifactId>signpost-core</artifactId>
-                <version>${signpost-core}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
