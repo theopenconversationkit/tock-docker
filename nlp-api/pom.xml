@@ -49,7 +49,7 @@
                         <image>
                             <name>tock/nlp_api:${project.version}</name>
                             <build>
-                                <from>openjdk:11</from>
+                                <from>openjdk:12</from>
                                 <assembly>
                                     <descriptorRef>artifact-with-dependencies</descriptorRef>
                                 </assembly>
