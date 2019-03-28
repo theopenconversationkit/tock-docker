@@ -27,12 +27,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tock>19.3.0-SNAPSHOT</tock>
-        <bot-open-data>19.3.0-SNAPSHOT</bot-open-data>
-        <stanford>19.3.0-SNAPSHOT</stanford>
+        <tock>19.3.0</tock>
+        <bot-open-data>19.3.0</bot-open-data>
+        <stanford>19.3.0</stanford>
 
         <jackson>2.9.8</jackson>
-        <okhttp>3.13.1</okhttp>
+        <okhttp>3.14.0</okhttp>
 
         <plugin.docker>0.27.2</plugin.docker>
         <plugin.release>2.5.3</plugin.release>
