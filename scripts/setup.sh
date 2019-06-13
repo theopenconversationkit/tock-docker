@@ -1,8 +1,8 @@
 #!/bin/bash
 
-mongodb1=${HOST1:-mongo}
-mongodb2=${HOST2:-mongo2}
-mongodb3=${HOST3:-mongo3}
+mongodb1=${MONGO1:-mongo}
+mongodb2=${MONGO2:-mongo2}
+mongodb3=${MONGO3:-mongo3}
 
 port1=${PORT1:-27017}
 port2=${PORT2:-27018}
