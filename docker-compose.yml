@@ -89,8 +89,9 @@ services:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
       - nlp_duckling_url=http://duckling:8080
       - tock_env=prod
-      - tock_bot_admin_rest_default_base_url=http://bot_open_data:8080
+      - tock_bot_admin_rest_default_base_url=http://bot_api:8080
       - tock_bot_compiler_service_url=http://kotlin_compiler:8080
+      - tock_configuration_bot_default_base_url=http://bot_api:8080
       #remove this in production
       - tock_https_env=false
       - botadminverticle_body_limit=-1
@@ -113,6 +114,21 @@ services:
       - tock_web_use_default_cors_handler_url=*
     ports:
       - "8888:8080"
+
+  bot_api:
+    image: tock/bot_api:$TAG
+    depends_on:
+      - mongo
+      - mongo2
+      - mongo3
+      - nlp_api
+    environment:
+      - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
+      - tock_nlp_service_url=http://nlp_api:8080
+      - tock_env=integ
+      - tock_websocket_enabled=true
+    ports:
+      - "8080:8080"
 
 volumes:
   tockmongo:

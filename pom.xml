@@ -45,6 +45,7 @@
         <module>nlp-admin</module>
         <module>nlp-api</module>
         <module>bot-admin</module>
+        <module>bot-api</module>
         <module>bot-open-data</module>
         <module>bot-admin-open-data</module>
         <module>kotlin-compiler</module>
@@ -98,6 +99,11 @@
             <dependency>
                 <groupId>fr.vsct.tock</groupId>
                 <artifactId>tock-nlp-api-service</artifactId>
+                <version>${tock}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.vsct.tock</groupId>
+                <artifactId>tock-bot-api-service</artifactId>
                 <version>${tock}</version>
             </dependency>
             <dependency>
