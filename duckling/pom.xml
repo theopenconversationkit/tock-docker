@@ -65,9 +65,8 @@
                                 </cmd>
                                 <tags>
                                     <tag>${major}</tag>
-                                    <tag>${tag}</tag>
-                                    <tag>${tock}</tag>
-                                    <tag>latest</tag>
+                                    <tag>${latest}</tag>
+                                    <tag>${project.version}</tag>
                                 </tags>
                             </build>
                             <run>

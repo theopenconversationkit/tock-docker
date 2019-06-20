@@ -27,10 +27,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <major>19.3</major>
-        <tag>${major}.2</tag>
-        <current>${tag}-SNAPSHOT</current>
-        <tock>${current}</tock>
+        <major>19.3-SNAPSHOT</major>
+        <latest>latest</latest>
+        <tock>${project.version}</tock>
         <bot-open-data>${tock}</bot-open-data>
         <stanford>${tock}</stanford>
 
