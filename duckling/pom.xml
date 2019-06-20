@@ -63,6 +63,11 @@
                                 <cmd>
                                     <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -cp '/maven/*' fr.vsct.tock.duckling.service.StartServerKt</shell>
                                 </cmd>
+                                <tags>
+                                    <tag>${tag}</tag>
+                                    <tag>${tock}</tag>
+                                    <tag>latest</tag>
+                                </tags>
                             </build>
                             <run>
                                 <ports>
