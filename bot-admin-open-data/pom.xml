@@ -92,6 +92,7 @@
                                     <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dtock_nlp_model_refresh_rate=10 -cp '/maven/*' fr.vsct.tock.bot.admin.StartBotAdminServerKt</shell>
                                 </cmd>
                                 <tags>
+                                    <tag>${major}</tag>
                                     <tag>${tag}</tag>
                                     <tag>${tock}</tag>
                                     <tag>latest</tag>

@@ -57,6 +57,7 @@
                                     <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -cp '/maven/*' fr.vsct.tock.nlp.api.StartNlpServiceKt</shell>
                                 </cmd>
                                 <tags>
+                                    <tag>${major}</tag>
                                     <tag>${tag}</tag>
                                     <tag>${tock}</tag>
                                     <tag>latest</tag>

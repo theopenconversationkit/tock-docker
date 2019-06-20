@@ -27,7 +27,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tag>19.3.2</tag>
+        <major>19.3</major>
+        <tag>${major}.2</tag>
         <current>${tag}-SNAPSHOT</current>
         <tock>${current}</tock>
         <bot-open-data>${tock}</bot-open-data>
