@@ -18,7 +18,7 @@ This project contains the source to build and deploy the docker files, and also 
 dos2unix ./scripts/setup.sh
 ```
 
-### Run the NLP stack
+### Run the NLP stack: docker-compose.yml
 
 ```sh 
     #get the last docker-compose file
@@ -47,9 +47,23 @@ In order to reach the mongo database from a client
 127.0.0.1 mongo3
 ``` 
 
-### Run the Open Data Bot example
+### Run the Bot API stack: docker-compose-bot.yml
 
-This docker-compose file starts the NLP stack with the [Open Data Bot](https://github.com/voyages-sncf-technologies/tock-bot-open-data). 
+```sh 
+    #get the last docker-compose file
+    curl -o docker-compose.yml https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/docker-compose.yml
+    #get the script to start mongo in replicaset mode
+    mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
+    #get the last tag
+    curl -o .env https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/.env
+    #launch the stack
+    docker-compose -f docker-compose-bot.yml up
+``` 
+### Run the Open Data Bot example: docker-compose-bot-open-data.yml
+
+This docker-compose file starts the NLP stack with the [Open Data Bot](https://github.com/voyages-sncf-technologies/tock-bot-open-data).
+
+ 
 
 * Edit the file [bot-open-data-variables.env](https://github.com/voyages-sncf-technologies/tock-docker/blob/master/bot-open-data-variables.env) and set the required env variables.
  
