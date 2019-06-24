@@ -50,8 +50,8 @@ In order to reach the mongo database from a client
 ### Run the Bot API stack: docker-compose-bot.yml
 
 ```sh 
-    #get the last docker-compose file
-    curl -o docker-compose.yml https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/docker-compose.yml
+    #get the last docker-compose-bot file
+    curl -o docker-compose.yml https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/docker-compose-bot.yml
     #get the script to start mongo in replicaset mode
     mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
     #get the last tag
