@@ -1,5 +1,6 @@
 [![Gitter](https://badges.gitter.im/tockchat/Lobby.svg)](https://gitter.im/tockchat/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 [![Build Status](https://travis-ci.org/voyages-sncf-technologies/tock-docker.png)](https://travis-ci.org/voyages-sncf-technologies/tock-docker)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tock/nlp_api.svg)](https://hub.docker.com/u/tock/)
 
 # Docker images for [Tock](https://github.com/voyages-sncf-technologies/tock)
 
