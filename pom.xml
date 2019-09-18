@@ -34,7 +34,7 @@
         <stanford>${tock}</stanford>
 
         <jackson>2.9.9</jackson>
-        <okhttp>4.1.0</okhttp>
+        <okhttp>4.2.0</okhttp>
 
         <plugin.docker>0.31.0</plugin.docker>
         <plugin.release>2.5.3</plugin.release>
