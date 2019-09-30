@@ -1,8 +1,8 @@
 [![Gitter](https://badges.gitter.im/tockchat/Lobby.svg)](https://gitter.im/tockchat/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
-[![Build Status](https://travis-ci.org/voyages-sncf-technologies/tock-docker.png)](https://travis-ci.org/voyages-sncf-technologies/tock-docker)
+[![Build Status](https://travis-ci.org/theopenconversationkits/tock-docker.png)](https://travis-ci.org/theopenconversationkits/tock-docker)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tock/nlp_api.svg)](https://hub.docker.com/u/tock/)
 
-# Docker images for [Tock](https://github.com/voyages-sncf-technologies/tock)
+# Docker images for [Tock](https://github.com/theopenconversationkits/tock)
 
 ## Run images
 
@@ -23,11 +23,11 @@ dos2unix ./scripts/setup.sh
 
 ```sh 
     #get the last docker-compose file
-    curl -o docker-compose.yml https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/docker-compose.yml
+    curl -o docker-compose.yml https://raw.githubusercontent.com/theopenconversationkits/tock-docker/master/docker-compose.yml
     #get the script to start mongo in replicaset mode
-    mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
+    mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/theopenconversationkits/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
     #get the last tag
-    curl -o .env https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/.env
+    curl -o .env https://raw.githubusercontent.com/theopenconversationkits/tock-docker/master/.env
     #launch the stack
     docker-compose up
 ``` 
@@ -52,34 +52,34 @@ In order to reach the mongo database from a client
 
 ```sh 
     #get the last docker-compose-bot file
-    curl -o docker-compose.yml https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/docker-compose-bot.yml
+    curl -o docker-compose.yml https://raw.githubusercontent.com/theopenconversationkits/tock-docker/master/docker-compose-bot.yml
     #get the script to start mongo in replicaset mode
-    mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
+    mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/theopenconversationkits/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
     #get the last tag
-    curl -o .env https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/.env
+    curl -o .env https://raw.githubusercontent.com/theopenconversationkits/tock-docker/master/.env
     #launch the stack
     docker-compose -f docker-compose-bot.yml up
 ``` 
 ### Run the Open Data Bot example: docker-compose-bot-open-data.yml
 
-This docker-compose file starts the NLP stack with the [Open Data Bot](https://github.com/voyages-sncf-technologies/tock-bot-open-data).
+This docker-compose file starts the NLP stack with the [Open Data Bot](https://github.com/theopenconversationkits/tock-bot-open-data).
 
  
 
-* Edit the file [bot-open-data-variables.env](https://github.com/voyages-sncf-technologies/tock-docker/blob/master/bot-open-data-variables.env) and set the required env variables.
+* Edit the file [bot-open-data-variables.env](https://github.com/theopenconversationkits/tock-docker/blob/master/bot-open-data-variables.env) and set the required env variables.
  
 You will need a (free) [SNCF Open Data key](https://data.sncf.com/) and
  
    * optionally a Messenger application with "messages" and "messaging_postbacks" webhook events activated - look at the [Facebook documentation](https://developers.facebook.com/docs/messenger-platform/guides/quick-start) 
-   and [Tock Messenger Configuration](https://github.com/voyages-sncf-technologies/tock/tree/master/bot/connector-messenger) instructions. 
+   and [Tock Messenger Configuration](https://github.com/theopenconversationkits/tock/tree/master/bot/connector-messenger) instructions. 
 
-   * optionally a Google Assistant project (see https://developers.google.com/actions/sdk/create-a-project ) - sample project file here: [google_actions_fr.json](https://raw.githubusercontent.com/voyages-sncf-technologies/tock-bot-open-data/master/src/main/resources/google_actions_fr.json)
-   Look at [Tock Google Assistant configuration](https://github.com/voyages-sncf-technologies/tock/tree/master/bot/connector-ga).
+   * optionally a Google Assistant project (see https://developers.google.com/actions/sdk/create-a-project ) - sample project file here: [google_actions_fr.json](https://raw.githubusercontent.com/theopenconversationkits/tock-bot-open-data/master/src/main/resources/google_actions_fr.json)
+   Look at [Tock Google Assistant configuration](https://github.com/theopenconversationkits/tock/tree/master/bot/connector-ga).
  
 
 ```sh 
     #get the file
-    curl -o bot-open-data-variables.env https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/bot-open-data-variables.env
+    curl -o bot-open-data-variables.env https://raw.githubusercontent.com/theopenconversationkits/tock-docker/master/bot-open-data-variables.env
 ``` 
 
 Then edit the values:
@@ -100,11 +100,11 @@ Then edit the values:
 
 ```sh 
     #get the last docker compose file
-    curl -o docker-compose-bot-open-data.yml https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/docker-compose-bot-open-data.yml
+    curl -o docker-compose-bot-open-data.yml https://raw.githubusercontent.com/theopenconversationkits/tock-docker/master/docker-compose-bot-open-data.yml
     #get the script to start mongo in replicaset mode
-    mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
+    mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/theopenconversationkits/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
     #get the last tag
-    curl -o .env https://raw.githubusercontent.com/voyages-sncf-technologies/tock-docker/master/.env
+    curl -o .env https://raw.githubusercontent.com/theopenconversationkits/tock-docker/master/.env
     #launch the stack
     docker-compose -f docker-compose-bot-open-data.yml up
 ``` 
@@ -122,7 +122,7 @@ Now you can start to talk to the bot!
 You will need [Maven](https://maven.apache.org/) and [Git](https://git-scm.com/).
 
 ```sh 
-    git clone https://github.com/voyages-sncf-technologies/tock-docker.git
+    git clone https://github.com/theopenconversationkits/tock-docker.git
     cd tock-docker
     mvn package docker:build
 ```    

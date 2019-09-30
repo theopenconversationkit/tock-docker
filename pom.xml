@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ This file is part of the tock-docker distribution.
-  ~ (https://github.com/voyages-sncf-technologies/tock-docker)
+  ~ (https://github.com/theopenconversationkits/tock-docker)
   ~ Copyright (c) 2017 VSCT.
   ~
   ~ tock-corenlp is free software: you can redistribute it and/or modify
@@ -223,14 +223,14 @@
 
     <inceptionYear>2017</inceptionYear>
     <organization>
-        <name>voyages-sncf-technologies</name>
+        <name>theopenconversationkits</name>
     </organization>
     <developers>
         <developer>
             <id>jburet_vsct</id>
             <name>Julien Buret</name>
             <email>jburet@voyages-sncf.com</email>
-            <organization>voyages-sncf-technologies</organization>
+            <organization>theopenconversationkits</organization>
             <organizationUrl>https://www.voyages-sncf.com/</organizationUrl>
         </developer>
     </developers>
@@ -244,9 +244,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git@github.com:voyages-sncf-technologies/tock-docker.git</connection>
-        <developerConnection>scm:git:git@github.com:voyages-sncf-technologies/tock-docker.git</developerConnection>
-        <url>git@github.com:voyages-sncf-technologies/tock-docker.git</url>
+        <connection>scm:git:git@github.com:theopenconversationkits/tock-docker.git</connection>
+        <developerConnection>scm:git:git@github.com:theopenconversationkits/tock-docker.git</developerConnection>
+        <url>git@github.com:theopenconversationkits/tock-docker.git</url>
         <tag>HEAD</tag>
     </scm>
     <distributionManagement>
