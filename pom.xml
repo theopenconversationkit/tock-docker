@@ -20,14 +20,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fr.vsct.tock</groupId>
+    <groupId>ai.tock</groupId>
     <artifactId>tock-docker</artifactId>
-    <version>19.3.4-SNAPSHOT</version>
+    <version>19.9.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <major>19.4-SNAPSHOT</major>
+        <major>19.9-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
         <tock>${project.version}</tock>
         <bot-open-data>${tock}</bot-open-data>
@@ -56,75 +56,75 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-duckling-service</artifactId>
                 <type>zip</type>
                 <classifier>dependencies</classifier>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-admin-web</artifactId>
                 <type>zip</type>
                 <classifier>web</classifier>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-api-doc</artifactId>
                 <type>zip</type>
                 <classifier>web</classifier>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-admin-server</artifactId>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-bot-admin-web</artifactId>
                 <type>zip</type>
                 <classifier>web</classifier>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-bot-admin-server</artifactId>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-build-model-worker</artifactId>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-api-service</artifactId>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-bot-api-service</artifactId>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-bot-admin-kotlin-compiler-server</artifactId>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>bot-toolkit</artifactId>
                 <version>${tock}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-bot-open-data</artifactId>
                 <version>${bot-open-data}</version>
             </dependency>
             <dependency>
-                <groupId>fr.vsct.tock</groupId>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-model-stanford</artifactId>
                 <version>${stanford}</version>
             </dependency>

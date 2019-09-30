@@ -21,21 +21,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>fr.vsct.tock</groupId>
+        <groupId>ai.tock</groupId>
         <artifactId>tock-docker</artifactId>
-        <version>19.3.4-SNAPSHOT</version>
+        <version>19.9.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>tock-docker-kotlin-compiler</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>fr.vsct.tock</groupId>
+            <groupId>ai.tock</groupId>
             <artifactId>tock-bot-admin-kotlin-compiler-server</artifactId>
         </dependency>
         <!-- to allow compilation with tock engine -->
         <dependency>
-            <groupId>fr.vsct.tock</groupId>
+            <groupId>ai.tock</groupId>
             <artifactId>bot-toolkit</artifactId>
         </dependency>
     </dependencies>
@@ -64,7 +64,7 @@
                                     </inline>
                                 </assembly>
                                 <cmd>
-                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8  -cp '/maven/*' fr.vsct.tock.bot.admin.kotlin.compiler.server.KotlinCompilerServerKt</shell>
+                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8  -cp '/maven/*' ai.tock.bot.admin.kotlin.compiler.server.KotlinCompilerServerKt</shell>
                                 </cmd>
                                 <tags>
                                     <tag>${major}</tag>

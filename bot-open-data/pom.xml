@@ -21,16 +21,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>fr.vsct.tock</groupId>
+        <groupId>ai.tock</groupId>
         <artifactId>tock-docker</artifactId>
-        <version>19.3.4-SNAPSHOT</version>
+        <version>19.9.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>tock-docker-bot-open-data</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>fr.vsct.tock</groupId>
+            <groupId>ai.tock</groupId>
             <artifactId>tock-bot-open-data</artifactId>
         </dependency>
     </dependencies>
@@ -50,7 +50,7 @@
                                     <descriptorRef>artifact-with-dependencies</descriptorRef>
                                 </assembly>
                                 <cmd>
-                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -cp '/maven/*' fr.vsct.tock.bot.open.data.StartKt</shell>
+                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -cp '/maven/*' ai.tock.bot.open.data.StartKt</shell>
                                 </cmd>
                                 <tags>
                                     <tag>${major}</tag>

@@ -21,20 +21,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>fr.vsct.tock</groupId>
+        <groupId>ai.tock</groupId>
         <artifactId>tock-docker</artifactId>
-        <version>19.3.4-SNAPSHOT</version>
+        <version>19.9.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>tock-docker-nlp-api</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>fr.vsct.tock</groupId>
+            <groupId>ai.tock</groupId>
             <artifactId>tock-nlp-api-service</artifactId>
         </dependency>
         <dependency>
-            <groupId>fr.vsct.tock</groupId>
+            <groupId>ai.tock</groupId>
             <artifactId>tock-nlp-model-stanford</artifactId>
         </dependency>
     </dependencies>
@@ -54,7 +54,7 @@
                                     <descriptorRef>artifact-with-dependencies</descriptorRef>
                                 </assembly>
                                 <cmd>
-                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -cp '/maven/*' fr.vsct.tock.nlp.api.StartNlpServiceKt</shell>
+                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -cp '/maven/*' ai.tock.nlp.api.StartNlpServiceKt</shell>
                                 </cmd>
                                 <tags>
                                     <tag>${major}</tag>
