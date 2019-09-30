@@ -2,7 +2,7 @@
 
 ## Local configuration
 
-Copy/paste the contents of [etc/deploy-settings.xml](https://github.com/theopenconversationkits/tock-docker/blob/master/etc/deploy-settings.xml)
+Copy/paste the contents of [etc/deploy-settings.xml](https://github.com/theopenconversationkit/tock-docker/blob/master/etc/deploy-settings.xml)
  in your .m2/settings.xml - set the login/password of your docker hub account
 
 ## How to deploy a snapshot
