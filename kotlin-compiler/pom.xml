@@ -33,11 +33,6 @@
             <groupId>ai.tock</groupId>
             <artifactId>tock-bot-admin-kotlin-compiler-server</artifactId>
         </dependency>
-        <!-- to allow compilation with tock engine -->
-        <dependency>
-            <groupId>ai.tock</groupId>
-            <artifactId>bot-toolkit</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
