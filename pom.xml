@@ -27,8 +27,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <major>19.9-SNAPSHOT</major>
-        <latest>latest-SNAPSHOT</latest>
+        <major>19.9</major>
+        <latest>latest</latest>
         <tock>${project.version}</tock>
         <bot-open-data>${tock}</bot-open-data>
         <stanford>${tock}</stanford>
