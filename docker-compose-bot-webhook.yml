@@ -130,7 +130,7 @@ services:
     ports:
       - "8080:8080"
 
-  bot_api-webhook:
+  demo_api_webhook:
     image: tock/bot_api_webhook:$TAG
     depends_on:
       - mongo

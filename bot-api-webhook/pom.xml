@@ -60,10 +60,10 @@
                             </build>
                             <run>
                                 <ports>
-                                    <port>8081:8880</port>
+                                    <port>8887:8887</port>
                                 </ports>
                                 <log>
-                                    <prefix>bot_api</prefix>
+                                    <prefix>bot_api_webhook</prefix>
                                     <color>red</color>
                                 </log>
                             </run>
