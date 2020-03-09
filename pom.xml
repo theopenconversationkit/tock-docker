@@ -29,10 +29,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>19.9-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>${project.version}</tock>
-        <bot-open-data>${tock}</bot-open-data>
-        <stanford>${tock}</stanford>
-        <demo>${tock}</demo>
+        <tock>19.9.4</tock>
+        <bot-open-data>19.9.4</bot-open-data>
+        <stanford>19.9.4</stanford>
+        <demo>19.9.4</demo>
 
         <jackson>2.10.3</jackson>
         <okhttp>4.4.0</okhttp>
