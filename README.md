@@ -52,7 +52,7 @@ In order to reach the mongo database from a client
 
 ```sh 
     #get the last docker-compose-bot file
-    curl -o docker-compose.yml https://raw.githubusercontent.com/theopenconversationkit/tock-docker/master/docker-compose-bot.yml
+    curl -o docker-compose-bot.yml https://raw.githubusercontent.com/theopenconversationkit/tock-docker/master/docker-compose-bot.yml
     #get the script to start mongo in replicaset mode
     mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/theopenconversationkit/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
     #get the last tag
