@@ -27,6 +27,7 @@
     </parent>
 
     <artifactId>tock-docker-kotlin-compiler</artifactId>
+    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>

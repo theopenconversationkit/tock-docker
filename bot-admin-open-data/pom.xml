@@ -27,6 +27,7 @@
     </parent>
 
     <artifactId>tock-docker-bot-admin-open-data</artifactId>
+    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>

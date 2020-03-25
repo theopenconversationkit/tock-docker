@@ -27,6 +27,7 @@
     </parent>
 
     <artifactId>tock-docker-bot-api-webhook</artifactId>
+    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>
@@ -47,7 +48,14 @@
                             <build>
                                 <from>openjdk:14</from>
                                 <assembly>
-                                    <descriptorRef>artifact-with-dependencies</descriptorRef>
+                                    <inline>
+                                        <dependencySets>
+                                            <dependencySet>
+                                                <useProjectArtifact>false</useProjectArtifact>
+                                                <unpack>false</unpack>
+                                            </dependencySet>
+                                        </dependencySets>
+                                    </inline>
                                 </assembly>
                                 <cmd>
                                     <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -cp '/maven/*' ai.tock.demo.webhook.StartWebhookKt</shell>
