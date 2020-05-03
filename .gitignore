@@ -4,6 +4,8 @@
 /dist
 /tmp
 target
+target/checkout/.env
+
 
 # IDEs and editors
 /.idea
