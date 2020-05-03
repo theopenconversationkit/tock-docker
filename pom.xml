@@ -27,18 +27,18 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <major>19.9-SNAPSHOT</major>
+        <major>20.3-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>${project.version}</tock>
-        <bot-open-data>${tock}</bot-open-data>
-        <stanford>${tock}</stanford>
-        <demo>${tock}</demo>
+        <tock>20.3.1</tock>
+        <bot-open-data>20.3.1</bot-open-data>
+        <stanford>20.3.1</stanford>
+        <demo>20.3.1</demo>
 
-        <jackson>2.10.3</jackson>
-        <okhttp>4.4.0</okhttp>
+        <jackson>2.11.0</jackson>
+        <okhttp>4.6.0</okhttp>
 
-        <plugin.docker>0.31.0</plugin.docker>
-        <plugin.release>2.5.3</plugin.release>
+        <plugin.docker>0.33.0</plugin.docker>
+        <plugin.release>3.0.0-M1</plugin.release>
         <plugin.resources>3.1.0</plugin.resources>
     </properties>
 
