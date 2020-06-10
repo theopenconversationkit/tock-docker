@@ -30,7 +30,7 @@
         <major>20.3-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
         <tock>20.3.3-SNAPSHOT</tock>
-        <bot-open-data>20.3.2</bot-open-data>
+        <bot-open-data>${tock}</bot-open-data>
         <stanford>${tock}</stanford>
         <demo>20.3.2</demo>
 
