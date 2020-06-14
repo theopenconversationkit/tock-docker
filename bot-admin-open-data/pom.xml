@@ -75,6 +75,7 @@
                                                 <unpack>false</unpack>
                                                 <excludes>
                                                     <exclude>*:web</exclude>
+                                                    <exclude>*:sources</exclude>
                                                 </excludes>
                                             </dependencySet>
                                             <dependencySet>
