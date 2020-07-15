@@ -29,13 +29,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>20.3-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>${project.version}</tock>
-        <bot-open-data>${tock}</bot-open-data>
-        <stanford>${tock}</stanford>
-        <demo>20.3.2</demo>
+        <tock>20.3.3</tock>
+        <bot-open-data>20.3.3</bot-open-data>
+        <stanford>20.3.3</stanford>
+        <demo>20.3.3</demo>
 
-        <jackson>2.11.0</jackson>
-        <okhttp>4.7.2</okhttp>
+        <jackson>2.11.1</jackson>
+        <okhttp>4.8.0</okhttp>
         <kotlin>1.3.72</kotlin>
 
         <plugin.docker>0.33.0</plugin.docker>
@@ -130,6 +130,11 @@
                 <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-model-stanford</artifactId>
                 <version>${stanford}</version>
+            </dependency>
+            <dependency>
+                <groupId>ai.tock</groupId>
+                <artifactId>tock-nlp-model-rasa</artifactId>
+                <version>${tock}</version>
             </dependency>
             <dependency>
                 <groupId>ai.tock</groupId>

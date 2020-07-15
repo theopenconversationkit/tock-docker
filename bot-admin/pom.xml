@@ -54,6 +54,10 @@
             <groupId>ai.tock</groupId>
             <artifactId>tock-nlp-model-stanford</artifactId>
         </dependency>
+        <dependency>
+            <groupId>ai.tock</groupId>
+            <artifactId>tock-nlp-model-rasa</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -50,6 +50,10 @@
         </dependency>
         <dependency>
             <groupId>ai.tock</groupId>
+            <artifactId>tock-nlp-model-rasa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ai.tock</groupId>
             <artifactId>tock-bot-open-data</artifactId>
         </dependency>
     </dependencies>
