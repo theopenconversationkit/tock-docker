@@ -103,6 +103,11 @@
             </dependency>
             <dependency>
                 <groupId>ai.tock</groupId>
+                <artifactId>tock-nlp-build-model-worker-on-aws-batch</artifactId>
+                <version>${tock}</version>
+            </dependency>
+            <dependency>
+                <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-api-service</artifactId>
                 <version>${tock}</version>
             </dependency>

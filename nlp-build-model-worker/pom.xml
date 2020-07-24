@@ -36,6 +36,10 @@
         </dependency>
         <dependency>
             <groupId>ai.tock</groupId>
+            <artifactId>tock-nlp-build-model-worker-on-aws-batch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ai.tock</groupId>
             <artifactId>tock-nlp-model-stanford</artifactId>
         </dependency>
         <dependency>
@@ -66,7 +70,7 @@
                                     </inline>
                                 </assembly>
                                 <cmd>
-                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dtock_nlp_model_refresh=false -cp '/maven/*' ai.tock.nlp.build.StartBuildWorkerKt</shell>
+                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dtock_nlp_model_refresh=false -cp '/maven/*' ai.tock.nlp.build.StartBuildWorkerKt $TOCK_BUILD_TYPE</shell>
                                 </cmd>
                                 <tags>
                                     <tag>${major}</tag>
