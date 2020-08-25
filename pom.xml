@@ -34,9 +34,9 @@
         <stanford>20.3.4-SNAPSHOT</stanford>
         <demo>20.3.3</demo>
 
-        <jackson>2.11.1</jackson>
-        <okhttp>4.8.0</okhttp>
-        <kotlin>1.3.72</kotlin>
+        <jackson>2.11.2</jackson>
+        <okhttp>4.8.1</okhttp>
+        <kotlin>1.4.0</kotlin>
 
         <plugin.docker>0.33.0</plugin.docker>
         <plugin.release>3.0.0-M1</plugin.release>
