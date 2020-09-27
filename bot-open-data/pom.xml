@@ -46,7 +46,7 @@
                         <image>
                             <name>tock/bot_open_data:${project.version}</name>
                             <build>
-                                <from>openjdk:14</from>
+                                <from>openjdk:15</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>
