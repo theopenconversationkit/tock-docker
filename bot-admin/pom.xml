@@ -94,10 +94,16 @@
                                                 </includes>
                                             </dependencySet>
                                         </dependencySets>
+                                        <files>
+                                            <file>
+                                                <source>logback.xml</source>
+                                                <outputDirectory>.</outputDirectory>
+                                            </file>
+                                        </files>
                                     </inline>
                                 </assembly>
                                 <cmd>
-                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dtock_nlp_model_refresh_rate=10 -cp '/maven/*' ai.tock.bot.admin.StartBotAdminServerKt</shell>
+                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dtock_nlp_model_refresh_rate=10 -Dlogback.configurationFile='file:///maven/logback.xml' -cp '/maven/*' ai.tock.bot.admin.StartBotAdminServerKt</shell>
                                 </cmd>
                                 <tags>
                                     <tag>${major}</tag>

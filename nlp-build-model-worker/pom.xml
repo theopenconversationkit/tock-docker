@@ -67,10 +67,16 @@
                                                 <unpack>false</unpack>
                                             </dependencySet>
                                         </dependencySets>
+                                        <files>
+                                            <file>
+                                                <source>logback.xml</source>
+                                                <outputDirectory>.</outputDirectory>
+                                            </file>
+                                        </files>
                                     </inline>
                                 </assembly>
                                 <cmd>
-                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dtock_nlp_model_refresh=false -cp '/maven/*' ai.tock.nlp.build.StartBuildWorkerKt $TOCK_BUILD_TYPE</shell>
+                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dtock_nlp_model_refresh=false -Dlogback.configurationFile='file:///maven/logback.xml' -cp '/maven/*' ai.tock.nlp.build.StartBuildWorkerKt $TOCK_BUILD_TYPE</shell>
                                 </cmd>
                                 <tags>
                                     <tag>${major}</tag>
