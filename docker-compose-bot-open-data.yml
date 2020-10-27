@@ -94,6 +94,9 @@ services:
       #remove this in production
       - tock_https_env=false
       - botadminverticle_body_limit=-1
+#      - tock_default_log_level=warn
+#      - tock_service_log_level=info
+#      - tock_database_log_level=warn
     ports:
       - "80:8080"
 
@@ -111,6 +114,9 @@ services:
       - tock_web_use_default_cors_handler=true
       - tock_web_use_default_cors_handler_with_credentials=false
       - tock_web_use_default_cors_handler_url=*
+#      - tock_default_log_level=warn
+#      - tock_service_log_level=info
+#      - tock_database_log_level=warn
     ports:
       - "8888:8080"
 
@@ -128,6 +134,9 @@ services:
       - tock_nlp_service_url=http://nlp_api:8080
       - tock_env=prod
       - tock_configuration_bot_default_base_url=http://bot_open_data:8080
+#      - tock_default_log_level=warn
+#      - tock_service_log_level=info
+#      - tock_database_log_level=warn
     ports:
       - "8080:8080"
 
