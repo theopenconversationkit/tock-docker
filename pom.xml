@@ -27,14 +27,14 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <major>20.9-SNAPSHOT</major>
-        <latest>latest-SNAPSHOT</latest>
-        <tock>20.9.2-SNAPSHOT</tock>
-        <bot-open-data>20.9.2-SNAPSHOT</bot-open-data>
-        <stanford>20.9.2-SNAPSHOT</stanford>
-        <demo>20.9.1</demo>
+        <major>20.9</major>
+        <latest>latest</latest>
+        <tock>20.9.2</tock>
+        <bot-open-data>20.9.2</bot-open-data>
+        <stanford>20.9.2</stanford>
+        <demo>20.9.2</demo>
 
-        <jackson>2.11.2</jackson>
+        <jackson>2.11.3</jackson>
         <okhttp>4.9.0</okhttp>
         <kotlin>1.4.10</kotlin>
 
