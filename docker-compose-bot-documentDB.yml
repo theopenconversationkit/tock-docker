@@ -144,7 +144,6 @@ services:
       - "8080:8080"
     volumes:
       - ./ssl:/ssl
-    dns_search: aiel.sncf.fr
     restart: always
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/healthcheck"]
