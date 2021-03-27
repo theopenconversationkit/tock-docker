@@ -28,15 +28,15 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>21.3</major>
-        <latest>latest-SNAPSHOT</latest>
-        <tock>21.3.0-SNAPSHOT</tock>
-        <bot-open-data>21.3.0-SNAPSHOT</bot-open-data>
-        <stanford>21.3.0-SNAPSHOT</stanford>
-        <demo>20.9.3</demo>
+        <latest>latest</latest>
+        <tock>21.3.0</tock>
+        <bot-open-data>21.3.0</bot-open-data>
+        <stanford>21.3.0</stanford>
+        <demo>21.3.0</demo>
 
-        <jackson>2.12.1</jackson>
-        <okhttp>4.9.0</okhttp>
-        <kotlin>1.4.30</kotlin>
+        <jackson>2.12.2</jackson>
+        <okhttp>4.9.1</okhttp>
+        <kotlin>1.4.32</kotlin>
 
         <plugin.docker>0.33.0</plugin.docker>
         <plugin.release>3.0.0-M1</plugin.release>
