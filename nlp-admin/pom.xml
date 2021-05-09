@@ -66,7 +66,7 @@
                         <image>
                             <name>tock/nlp_admin:${project.version}</name>
                             <build>
-                                <from>openjdk:15</from>
+                                <from>openjdk:16</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>
