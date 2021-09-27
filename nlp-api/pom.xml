@@ -54,7 +54,7 @@
                         <image>
                             <name>tock/nlp_api:${project.version}</name>
                             <build>
-                                <from>openjdk:16</from>
+                                <from>openjdk:17</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>

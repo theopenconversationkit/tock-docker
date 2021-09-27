@@ -46,7 +46,7 @@
                         <image>
                             <name>tock/kotlin_compiler:${project.version}</name>
                             <build>
-                                <from>openjdk:16</from>
+                                <from>openjdk:17</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>
