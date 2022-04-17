@@ -34,7 +34,7 @@
         <stanford>22.3.0</stanford>
         <demo>22.3.0</demo>
 
-        <jackson>2.13.2</jackson>
+        <jackson>2.13.2.1</jackson>
         <okhttp>4.9.3</okhttp>
         <kotlin>1.6.20</kotlin>
 
