@@ -68,7 +68,7 @@
                         <image>
                             <name>tock/bot_admin_open_data:${project.version}</name>
                             <build>
-                                <from>openjdk:17</from>
+                                <from>openjdk:18</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>
