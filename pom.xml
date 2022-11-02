@@ -34,7 +34,8 @@
         <stanford>22.9.2</stanford>
         <demo>22.9.0</demo>
 
-        <jackson>2.13.4.2</jackson>
+        <jackson>2.13.4</jackson>
+        <jackson-databinding>2.13.4.2</jackson-databinding>
         <okhttp>4.10.0</okhttp>
         <kotlin>1.7.20</kotlin>
 
@@ -161,7 +162,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson}</version>
+                <version>${jackson-databinding}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.datatype</groupId>
