@@ -29,19 +29,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>22.9-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>22.9.2-SNAPSHOT</tock>
-        <bot-open-data>22.9.2-SNAPSHOT</bot-open-data>
-        <stanford>22.9.2-SNAPSHOT</stanford>
+        <tock>22.9.2</tock>
+        <bot-open-data>22.9.2</bot-open-data>
+        <stanford>22.9.2</stanford>
         <demo>22.9.0</demo>
 
-        <jackson>2.13.4</jackson>
+        <jackson>2.13.4.2</jackson>
         <okhttp>4.10.0</okhttp>
         <kotlin>1.7.20</kotlin>
 
-        <plugin.docker>0.39.1</plugin.docker>
-        <plugin.release>3.0.0-M1</plugin.release>
-        <plugin.resources>3.2.0</plugin.resources>
-        <plugin.assembly>3.3.0</plugin.assembly>
+        <plugin.docker>0.40.2</plugin.docker>
+        <plugin.release>3.0.0-M6</plugin.release>
+        <plugin.resources>3.3.0</plugin.resources>
+        <plugin.assembly>3.4.2</plugin.assembly>
     </properties>
 
     <modules>
