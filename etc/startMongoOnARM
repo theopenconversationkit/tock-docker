@@ -1,0 +1,1 @@
+PLATFORM=arm64v8/ docker compose -f docker-compose-mongo-only.yml up
