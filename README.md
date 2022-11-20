@@ -19,6 +19,10 @@ This project contains the source to build and deploy the docker files, and also 
 dos2unix ./scripts/setup.sh
 ```
 
+### Prerequisite
+
+Install mongosh: [https://mongodb.com/docs/mongodb-shell/](https://mongodb.com/docs/mongodb-shell/)
+
 ### Run the NLP stack: docker-compose.yml
 
 ```sh 
