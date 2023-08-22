@@ -29,6 +29,11 @@
     <artifactId>tock-docker-bot-api</artifactId>
     <packaging>pom</packaging>
 
+    <properties>
+        <dialog-manager>tock-bot-dialog-manager-core-${project.version}</dialog-manager>
+        <jdk>20</jdk>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>ai.tock</groupId>
@@ -42,11 +47,15 @@
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
+                    <verbose>true</verbose>
                     <images>
                         <image>
                             <name>tock/bot_api:${project.version}</name>
                             <build>
-                                <from>amazoncorretto:20</from>
+                                <nocache>true</nocache>
+                                <from>python:3.8-slim-buster</from>
+                                <!-- If behind proxy -->
+                                <!--network>host</network-->
                                 <assembly>
                                     <inline>
                                         <dependencySets>
@@ -63,6 +72,30 @@
                                         </files>
                                     </inline>
                                 </assembly>
+                                <shell>
+                                    <arg>/bin/bash</arg>
+                                    <arg>-c</arg>
+                                </shell>
+                                <env>
+                                    <JAVA_HOME>/usr/lib/jvm/java-${jdk}-amazon-corretto</JAVA_HOME>
+                                    <!-- If behind proxy -->
+                                    <!--http_proxy>http://localhost:3128</http_proxy-->
+                                    <!--https_proxy>http://localhost:3128</https_proxy-->
+                                </env>
+                                <runCmds>
+
+                                    <run>apt-get update </run>
+                                    <run>apt-get -qq install -y curl wget gcc unzip graphviz</run>
+
+                                    <run>wget https://corretto.aws/downloads/latest/amazon-corretto-${jdk}-x64-linux-jdk.deb</run>
+                                    <run>apt-get -qqy install ./amazon-corretto-${jdk}-x64-linux-jdk.deb</run>
+                                    <run>update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-${jdk}-amazon-corretto/bin/java 1919</run>
+
+                                    <run>unzip /maven/${dialog-manager}.jar -d /maven/${dialog-manager}</run>
+                                    <run>mv /maven/${dialog-manager}/python /tmp</run>
+                                    <run>rm -r /maven/${dialog-manager}</run>
+                                    <run>pip3 install -r /tmp/python/install/requirements.txt</run>
+                                </runCmds>
                                 <cmd>
                                     <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dlogback.configurationFile='file:///maven/logback.xml' -cp '/maven/*' ai.tock.bot.api.service.StartBotApiKt</shell>
                                 </cmd>
