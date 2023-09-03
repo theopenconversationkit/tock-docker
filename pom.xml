@@ -28,16 +28,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>23.3</major>
-        <latest>latest-SNAPSHOT</latest>
-        <tock>23.3.4-SNAPSHOT</tock>
-        <bot-open-data>23.3.4-SNAPSHOT</bot-open-data>
-        <stanford>23.3.4-SNAPSHOT</stanford>
+        <latest>latest</latest>
+        <tock>23.3.4</tock>
+        <bot-open-data>23.3.4</bot-open-data>
+        <stanford>23.3.4</stanford>
         <demo>23.3.0</demo>
 
         <jackson>2.15.2</jackson>
         <jackson-databinding>2.15.2</jackson-databinding>
         <okhttp>4.10.0</okhttp>
-        <kotlin>1.9.0</kotlin>
+        <kotlin>1.9.10</kotlin>
 
         <plugin.docker>0.40.2</plugin.docker>
         <plugin.release>3.0.0-M6</plugin.release>
