@@ -56,6 +56,7 @@
         <module>bot-open-data</module>
         <module>bot-admin-open-data</module>
         <module>kotlin-compiler</module>
+        <module>llm-orchestrator-server</module>
     </modules>
 
     <dependencyManagement>
@@ -147,6 +148,13 @@
                 <groupId>ai.tock</groupId>
                 <artifactId>tock-bot-demo-api-webhook</artifactId>
                 <version>${demo}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ai.tock</groupId>
+                <artifactId>tock-llm-orchestrator-server</artifactId>
+                <type>zip</type>
+                <version>${tock}</version>
             </dependency>
 
             <dependency>
