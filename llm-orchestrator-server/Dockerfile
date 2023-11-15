@@ -15,4 +15,6 @@ RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
 
 COPY target/main/python/app /app
 
-CMD ["uvicorn", "src.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENV PYTHONPATH="${PYTHONPATH}:/app/src/"
+
+CMD ["uvicorn", "llm_orchestrator.main:app", "--host", "0.0.0.0", "--port", "8000"]
