@@ -131,6 +131,27 @@ You will need [Maven](https://maven.apache.org/) and [Git](https://git-scm.com/)
     mvn package docker:build
 ```    
 
+### Build images under corporate proxy
+
+The docker build is based on buildx so build occurs on a buildx builder node, this node run as a docker container that unfortunatly doesn't inherit proxy environment variables.
+
+To set your corporate proxy environment variable and use your coporate proxy during docker build stage you will need to define a custom docker buildx builder like this :
+```sh
+docker buildx create\
+   --driver-opt env.http_proxy="http://yourcoporateproxy:3128"\
+   --driver-opt env.https_proxy="http://yourcoporateproxy:3128"\
+   --name builder_with_corporate_proxy
+```
+
+*Note that the builder name builder_with_corporate_proxy can be customized.*
+
+Then define this environment variable :
+```sh
+BUILDX_BUILDER=builder_with_corporate_proxy mvn package docker:build
+```
+
+If needed you can remove / delete this builder using : `docker buildx rm builder_with_corporate_proxy`
+
 ## Run Mongo for Apple Silicon
 
 ```sh 
