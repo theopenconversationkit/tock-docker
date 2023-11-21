@@ -1,20 +1,13 @@
-FROM python:3
-
-RUN pip install poetry==1.7.0
-
-ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    POETRY_VIRTUALENVS_CREATE=0 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache
+FROM python:3.11-alpine
 
 WORKDIR /app
 
-COPY target/main/python/app/pyproject.toml /app
+COPY target/llm_orchestrator/requirements.txt llm_orchestrator/
 
-RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
+RUN pip install --no-cache-dir -r llm_orchestrator/requirements.txt
 
-COPY target/main/python/app /app
+COPY target/llm_orchestrator llm_orchestrator/
 
-ENV PYTHONPATH="${PYTHONPATH}:/app/src/"
+EXPOSE 8000
 
 CMD ["uvicorn", "llm_orchestrator.main:app", "--host", "0.0.0.0", "--port", "8000"]
