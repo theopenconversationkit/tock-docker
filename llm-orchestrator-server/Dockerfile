@@ -2,9 +2,9 @@ FROM python:3.11-alpine
 
 WORKDIR /app
 
-COPY target/llm_orchestrator/requirements.txt llm_orchestrator/
+COPY target/requirements.txt .
 
-RUN pip install --no-cache-dir -r llm_orchestrator/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY target/llm_orchestrator llm_orchestrator/
 
