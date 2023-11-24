@@ -29,15 +29,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>23.9-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>23.9.1-SNAPSHOT</tock>
-        <bot-open-data>23.9.1-SNAPSHOT</bot-open-data>
-        <stanford>23.9.1-SNAPSHOT</stanford>
+        <tock>23.9.1</tock>
+        <bot-open-data>23.9.1</bot-open-data>
+        <stanford>23.9.1</stanford>
         <demo>23.9.0</demo>
 
-        <jackson>2.15.2</jackson>
-        <jackson-databinding>2.15.2</jackson-databinding>
-        <okhttp>4.11.0</okhttp>
-        <kotlin>1.9.10</kotlin>
+        <jackson>2.15.3</jackson>
+        <jackson-databinding>2.15.3</jackson-databinding>
+        <okhttp>4.12.0</okhttp>
+        <kotlin>1.9.21</kotlin>
 
         <plugin.docker>0.40.2</plugin.docker>
         <plugin.release>3.0.0-M6</plugin.release>
@@ -183,6 +183,11 @@
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>logging-interceptor</artifactId>
                 <version>${okhttp}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib</artifactId>
+                <version>${kotlin}</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>

@@ -152,7 +152,15 @@ BUILDX_BUILDER=builder_with_corporate_proxy mvn package docker:build
 
 If needed you can remove / delete this builder using : `docker buildx rm builder_with_corporate_proxy`
 
-## Run Mongo for Apple Silicon
+## Apple Silicon (M1/M2/...)
+
+### set PLATFORM env var
+
+```sh 
+PLATFORM=arm64v8/ docker compose up
+```
+
+### Run Mongo
 
 ```sh 
 ./etc/startMongoOnARM    
