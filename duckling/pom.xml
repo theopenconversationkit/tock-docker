@@ -48,7 +48,7 @@
                         <image>
                             <name>tock/duckling:${project.version}</name>
                             <build>
-                                <from>amazoncorretto:21</from>
+                                <from>amazoncorretto:21-alpine</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>
