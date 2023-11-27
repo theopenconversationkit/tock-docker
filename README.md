@@ -165,3 +165,11 @@ PLATFORM=arm64v8/ docker compose up
 ```sh 
 ./etc/startMongoOnARM    
 ```
+
+## Troubleshooting
+
+### RAG - My Open Search cluster / dashboard isn't working
+
+Open Search needs severeal configuration to work :
+*  See Important host settings : https://opensearch.org/docs/latest/install-and-configure/install-opensearch/docker#important-host-settings
+*  Open Search needs a lot of free space on your disk when it starts you may have this lines in nodes logs `high disk watermark [90%] exceeded` if so increase your free storage by at least 10 Gb
