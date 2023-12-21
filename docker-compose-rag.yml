@@ -108,6 +108,7 @@ services:
       - tock_bot_admin_rest_default_base_url=http://bot_api:8080
       - tock_bot_compiler_service_url=http://kotlin_compiler:8080
       - tock_configuration_bot_default_base_url=http://bot_api:8080
+      - tock_llm_orchestrator_server_url=http://llm_orchestrator-server:8000
       #remove this in production
       - tock_https_env=false
       - botadminverticle_body_limit=-1
@@ -217,13 +218,6 @@ services:
 
   llm_orchestrator-server:
     image: "${PLATFORM}tock/llm-orchestrator-server:${TAG}"
-    depends_on:
-      - opensearch-node1
-    environment:
-      - no_proxy=opensearch-node1
-      - NO_PROXY=opensearch-node1
-      - tock_vector_store_type=opensearch
-      - tock_vector_store_url=http://opensearch-node1:9200
     ports:
       - "8000:8000"
 
