@@ -31,7 +31,7 @@
         <latest>latest-SNAPSHOT</latest>
         <tock>24.3.1-SNAPSHOT</tock>
         <bot-open-data>24.3.1-SNAPSHOT</bot-open-data>
-        <stanford>24.3.1-SNAPSHOT</stanford>
+        <tock-stanford>24.3.1-SNAPSHOT</tock-stanford>
         <demo>24.3.0</demo>
 
         <jackson>2.17.1</jackson>
@@ -39,7 +39,7 @@
         <okhttp>4.12.0</okhttp>
         <kotlin>2.0.0</kotlin>
 
-        <plugin.docker>0.40.2</plugin.docker>
+        <plugin.docker>0.43.4</plugin.docker>
         <plugin.release>3.0.1</plugin.release>
         <plugin.resources>3.3.0</plugin.resources>
         <plugin.assembly>3.4.2</plugin.assembly>
@@ -136,7 +136,7 @@
             <dependency>
                 <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-model-stanford</artifactId>
-                <version>${stanford}</version>
+                <version>${tock-stanford}</version>
             </dependency>
             <dependency>
                 <groupId>ai.tock</groupId>
