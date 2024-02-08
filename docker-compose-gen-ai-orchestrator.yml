@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+
+  gen_ai_orchestrator-server:
+    image: "${PLATFORM}tock/gen-ai-orchestrator-server:${TAG}"
+    ports:
+      - "8000:8000"
+

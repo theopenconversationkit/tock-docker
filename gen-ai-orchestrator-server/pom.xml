@@ -7,10 +7,10 @@
         <version>23.9.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>tock-docker-llm-orchestrator-server</artifactId>
+    <artifactId>tock-docker-gen-ai-orchestrator-server</artifactId>
     <packaging>pom</packaging>
 
-    <name>Tock Docker LLM Orchestrator Server</name>
+    <name>Tock Docker Gen AI Orchestrator Server</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>ai.tock</groupId>
-            <artifactId>tock-llm-orchestrator-server</artifactId>
+            <artifactId>tock-gen-ai-orchestrator-server</artifactId>
             <type>zip</type>
         </dependency>
     </dependencies>
@@ -39,7 +39,7 @@
                         </goals>
                         <configuration>
                             <includeGroupIds>ai.tock</includeGroupIds>
-                            <includeArtifactIds>tock-llm-orchestrator-server</includeArtifactIds>
+                            <includeArtifactIds>tock-gen-ai-orchestrator-server</includeArtifactIds>
                             <outputDirectory>
                                 ${project.build.directory}
                             </outputDirectory>
@@ -56,7 +56,7 @@
                     <verbose>true</verbose>
                     <images>
                         <image>
-                            <name>tock/llm-orchestrator-server:${project.version}</name>
+                            <name>tock/gen-ai-orchestrator-server:${project.version}</name>
                             <build>
                                 <network>host</network>
                                 <nocache>true</nocache>
@@ -72,7 +72,7 @@
                                     <port>8000:8000</port>
                                 </ports>
                                 <log>
-                                    <prefix>llm_python_core</prefix>
+                                    <prefix>gen_ai_orchestrator_server</prefix>
                                     <color>yellow</color>
                                 </log>
                             </run>
