@@ -108,8 +108,8 @@ services:
       - tock_bot_admin_rest_default_base_url=http://bot_api:8080
       - tock_bot_compiler_service_url=http://kotlin_compiler:8080
       - tock_configuration_bot_default_base_url=http://bot_api:8080
-      - tock_llm_orchestrator_server_url=http://llm_orchestrator-server:8000
-      - tock_llm_orchestrator_client_request_timeout_ms=55000
+      - tock_gen_ai_orchestrator_server_url=http://gen_ai_orchestrator-server:8000
+      - tock_gen_ai_orchestrator_client_request_timeout_ms=55000
       - tock_gen_ai_orchestrator_technical_error=Technical error :( sorry!
       #remove this in production
       - tock_https_env=false
@@ -160,8 +160,8 @@ services:
       - tock_nlp_service_url=http://nlp_api:8080
       - tock_env=integ
       - tock_websocket_enabled=true
-      - tock_llm_orchestrator_server_url=http://llm_orchestrator-server:8000
-      - tock_llm_orchestrator_client_request_timeout_ms=55000
+      - tock_gen_ai_orchestrator_server_url=http://gen_ai_orchestrator-server:8000
+      - tock_gen_ai_orchestrator_client_request_timeout_ms=55000
       - tock_gen_ai_orchestrator_technical_error=Technical error :( sorry!
 #      - tock_default_log_level=warn
 #      - tock_service_log_level=info
@@ -219,8 +219,8 @@ services:
     environment:
       OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
 
-  llm_orchestrator-server:
-    image: "${PLATFORM}tock/llm-orchestrator-server:${TAG}"
+  gen_ai_orchestrator-server:
+    image: "${PLATFORM}tock/gen-ai-orchestrator-server:${TAG}"
     ports:
       - "8000:8000"
     environment:

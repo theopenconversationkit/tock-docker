@@ -1,9 +1,0 @@
-version: '3'
-
-services:
-
-  llm_orchestrator-server:
-    image: "tock/llm-orchestrator-server:${TAG}"
-    ports:
-      - "8000:8000"
-
