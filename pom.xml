@@ -29,9 +29,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>23.9-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>23.9.2</tock>
-        <bot-open-data>23.9.2</bot-open-data>
-        <stanford>23.9.2</stanford>
+        <tock>23.9.3-SNAPSHOT</tock>
+        <bot-open-data>23.9.3-SNAPSHOT</bot-open-data>
+        <stanford>23.9.3-SNAPSHOT</stanford>
         <demo>23.9.0</demo>
 
         <jackson>2.16.1</jackson>
