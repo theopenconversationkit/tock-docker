@@ -2,13 +2,11 @@ FROM python:3.11-alpine
 
 WORKDIR /app
 
-ENV TARGET_SRC=target/src/main/python/server/src
-
-COPY $TARGET_SRC/requirements.txt .
+COPY target/requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY $TARGET_SRC/gen_ai_orchestrator gen_ai_orchestrator/
+COPY target/gen_ai_orchestrator gen_ai_orchestrator/
 
 EXPOSE 8000
 
