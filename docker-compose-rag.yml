@@ -229,6 +229,7 @@ services:
       tock_gen_ai_orchestrator_open_search_port: 9200
       tock_gen_ai_orchestrator_open_search_pwd: admin
       tock_gen_ai_orchestrator_open_search_user: admin
+      tock_gen_ai_orchestrator_ai_provider_timeout: 20
 
 
 volumes:
