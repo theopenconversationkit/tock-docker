@@ -57,7 +57,7 @@ services:
     entrypoint: [ "/scripts/setup.sh" ]
 
   build_worker:
-    image: "tock/build_worker:${TAG}"
+    image: "${PLATFORM}tock/build_worker:${TAG}"
     depends_on:
       - mongo
       - mongo2
@@ -71,7 +71,7 @@ services:
     #  - tock_database_log_level=warn
 
   duckling:
-    image: "tock/duckling:${TAG}"
+    image: "${PLATFORM}tock/duckling:${TAG}"
     environment:
       - tock_env=prod
       # - tock_default_log_level=warn
@@ -81,7 +81,7 @@ services:
       - "8080"
 
   kotlin_compiler:
-    image: "tock/kotlin_compiler:${TAG}"
+    image: "${PLATFORM}tock/kotlin_compiler:${TAG}"
     environment:
       - tock_env=prod
       - tock_kotlin_compiler_classpath=/maven
@@ -92,7 +92,7 @@ services:
       - "8080"
 
   admin_web:
-    image: "tock/bot_admin:${TAG}"
+    image: "${PLATFORM}tock/bot_admin:${TAG}"
     depends_on:
       - mongo
       - mongo2
@@ -125,7 +125,7 @@ services:
       - "80:8080"
 
   nlp_api:
-    image: "tock/nlp_api:${TAG}"
+    image: "${PLATFORM}tock/nlp_api:${TAG}"
     depends_on:
       - mongo
       - mongo2
@@ -147,7 +147,7 @@ services:
       - "8888:8080"
 
   bot_api:
-    image: "tock/bot_api:${TAG}"
+    image: "${PLATFORM}tock/bot_api:${TAG}"
     depends_on:
       - mongo
       - mongo2
@@ -163,6 +163,9 @@ services:
       - tock_gen_ai_orchestrator_server_url=http://gen_ai_orchestrator-server:8000
       - tock_gen_ai_orchestrator_client_request_timeout_ms=55000
       - tock_gen_ai_orchestrator_technical_error=Technical error :( sorry!
+      - tock_gen_ai_orchestrator_document_number_neighbors=1
+      - tock_gen_ai_orchestrator_dialog_number_messages=5
+      - tock_gen_ai_orchestrator_rag_debug_enabled=false
 #      - tock_default_log_level=warn
 #      - tock_service_log_level=info
 #      - tock_database_log_level=warn
@@ -229,7 +232,9 @@ services:
       tock_gen_ai_orchestrator_open_search_port: 9200
       tock_gen_ai_orchestrator_open_search_pwd: admin
       tock_gen_ai_orchestrator_open_search_user: admin
-      tock_gen_ai_orchestrator_ai_provider_timeout: 20
+      tock_gen_ai_orchestrator_llm_provider_timeout: 120
+      tock_gen_ai_orchestrator_em_provider_timeout: 120
+      tock_gen_ai_orchestrator_open_search_timeout: 5
 
 
 volumes:
