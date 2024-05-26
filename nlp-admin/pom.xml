@@ -66,7 +66,7 @@
                         <image>
                             <name>tock/nlp_admin:${project.version}</name>
                             <build>
-                                <from>amazoncorretto:21-alpine</from>
+                                <from>amazoncorretto:22-alpine</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>
