@@ -29,7 +29,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.8</version>
                 <executions>
                     <execution>
                         <id>unpack-tomcat</id>
@@ -51,9 +50,7 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.42.0</version>
                 <configuration>
-                    <verbose>true</verbose>
                     <images>
                         <image>
                             <name>tock/gen-ai-orchestrator-server:${project.version}</name>
