@@ -62,6 +62,13 @@
                                     <tag>${latest}</tag>
                                     <tag>${project.version}</tag>
                                 </tags>
+                                <buildx>
+                                    <builderName>${env.BUILDX_BUILDER}</builderName> <!--Fabric8 doesn't use builder defined in environment variable, enforcing it, see #33 -->
+                                    <platforms>
+                                        <platform>linux/amd64</platform>
+                                        <platform>linux/arm64</platform>
+                                    </platforms>
+                                </buildx>
                             </build>
                             <run>
                                 <ports>
