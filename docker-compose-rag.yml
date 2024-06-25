@@ -117,10 +117,10 @@ services:
       #remove this in production
       - tock_https_env=false
       - botadminverticle_body_limit=-1
-      - tock_users=techadmin@arkea.com,admin@app.com,user@app.com,botUser@app.com,faqUser@app.com,nlpUserOnly@arkea.com,botUserOnly@arkea.com,faqNlpUserOnly@arkea.com,faqBotUserOnly@arkea.com,adminOnly@arkea.com,techadminOnly@arkea.com
-      - tock_passwords=password,password,password,password,password,password,password,password,password,password,password
-      - tock_roles=nlpUser|botUser|faqNlpUser|faqBotUser|admin|technicalAdmin,nlpUser|botUser|faqNlpUser|faqBotUser|admin,nlpUser|botUser|faqNlpUser|faqBotUser,nlpUser|botUser,faqNlpUser|faqBotUser,nlpUser,botUser,faqNlpUser,faqBotUser,admin,technicalAdmin
-      - tock_organizations=app,app,app,app,app,app,app,app,app,app,app
+      - tock_users=techadmin@app.com,admin@app.com,user@app.com,botUser@app.com,nlpUserOnly@app.com,botUserOnly@app.com,adminOnly@app.com,techadminOnly@app.com
+      - tock_passwords=password,password,password,password,password,password,password,password
+      - tock_roles=nlpUser|botUser|admin|technicalAdmin,nlpUser|botUser|admin,nlpUser|botUser,nlpUser|botUser,nlpUser,botUser,admin,technicalAdmin
+      - tock_organizations=app,app,app,app,app,app,app,app
       - tock_default_log_level=debug
       - tock_service_log_level=debug
 #      - tock_database_log_level=warn
