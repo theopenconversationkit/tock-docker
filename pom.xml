@@ -27,11 +27,11 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <major>23.9-SNAPSHOT</major>
+        <major>24.3-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>24.3.3-SNAPSHOT</tock>
-        <bot-open-data>24.3.3-SNAPSHOT</bot-open-data>
-        <stanford>24.3.3-SNAPSHOT</stanford>
+        <tock>24.3.3</tock>
+        <bot-open-data>24.3.3</bot-open-data>
+        <stanford>24.3.3</stanford>
         <demo>24.3.0</demo>
 
         <jackson>2.17.1</jackson>
