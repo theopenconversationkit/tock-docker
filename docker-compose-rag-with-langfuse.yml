@@ -1,0 +1,291 @@
+# WARNING to run this you need to ensure that vm.max_map_count is correctly configured
+# See https://opensearch.org/docs/latest/install-and-configure/install-opensearch/docker#important-host-settings
+# We recommande having at least 40Gb free space on your disk to prevent this error : https://stackoverflow.com/a/67767478
+#   If you have less and something goes wrong at the cluster boot check that you don't have any logs "high disk watermark [90%] exceeded"
+#   if so make some free space a few Gb until this error desapear.
+version: '3'
+
+services:
+
+  mongo:
+    image: "${PLATFORM}mongo:${MONGO}"
+    volumes:
+      - tockmongo:/data/db
+    ports:
+      - "27017:27017"
+    command: --bind_ip_all --port 27017 --replSet "tock"
+
+  mongo2:
+    image: "${PLATFORM}mongo:${MONGO}"
+    depends_on:
+      - mongo
+    volumes:
+      - tockmongo2:/data/db
+    ports:
+      - "27018:27018"
+    command: --bind_ip_all --port 27018 --replSet "tock"
+
+  mongo3:
+    image: "${PLATFORM}mongo:${MONGO}"
+    depends_on:
+      - mongo
+      - mongo2
+    volumes:
+      - tockmongo3:/data/db
+    ports:
+      - "27019:27019"
+    command: --bind_ip_all --port 27019 --replSet "tock"
+
+  mongo-setup:
+    container_name: "mongo-setup"
+    image: "${PLATFORM}mongo:${MONGO}"
+    depends_on:
+      - "mongo"
+      - "mongo2"
+      - "mongo3"
+    links:
+      - mongo:mongo
+      - mongo2:mongo2
+      - mongo3:mongo3
+    volumes:
+      - ./scripts:/scripts
+    environment:
+      - MONGO1=mongo
+      - MONGO2=mongo2
+      - MONGO3=mongo3
+      - RS=tock
+    entrypoint: [ "/scripts/setup.sh" ]
+
+  build_worker:
+    image: "${PLATFORM}tock/build_worker:${TAG}"
+    depends_on:
+      - mongo
+      - mongo2
+      - mongo3
+    environment:
+      - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
+      - tock_env=prod
+      - JAVA_ARGS=-Xmx1g -XX:MaxMetaspaceSize=256m
+    #  - tock_default_log_level=warn
+    #  - tock_service_log_level=info
+    #  - tock_database_log_level=warn
+
+  duckling:
+    image: "${PLATFORM}tock/duckling:${TAG}"
+    environment:
+      - tock_env=prod
+      # - tock_default_log_level=warn
+      # - tock_service_log_level=info
+      # - tock_database_log_level=warn
+    expose:
+      - "8080"
+
+  kotlin_compiler:
+    image: "${PLATFORM}tock/kotlin_compiler:${TAG}"
+    environment:
+      - tock_env=prod
+      - tock_kotlin_compiler_classpath=/maven
+#      - tock_default_log_level=warn
+#      - tock_service_log_level=info
+#      - tock_database_log_level=warn
+    expose:
+      - "8080"
+
+  admin_web:
+    image: "${PLATFORM}tock/bot_admin:${TAG}"
+    depends_on:
+      - mongo
+      - mongo2
+      - mongo3
+      - duckling
+      - kotlin_compiler
+    environment:
+      - no_proxy=duckling,bot_api,kotlin_compiler
+      - NO_PROXY=duckling,bot_api,kotlin_compiler
+      - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
+      - nlp_duckling_url=http://duckling:8080
+      - tock_env=prod
+      - tock_file_upload_directory=file-uploads # custom directory for vert.x upload file system
+      - tock_namespace_open_access=true # Enabling/Disabling bot synchronization feature
+      - tock_bot_admin_rest_default_base_url=http://bot_api:8080
+      - tock_bot_compiler_service_url=http://kotlin_compiler:8080
+      - tock_configuration_bot_default_base_url=http://bot_api:8080
+      - tock_gen_ai_orchestrator_server_url=http://gen_ai_orchestrator-server:8000
+      - tock_gen_ai_orchestrator_client_request_timeout_ms=55000
+      - tock_gen_ai_orchestrator_secret_storage_type=Raw
+      - tock_gen_ai_orchestrator_technical_error=Technical error :( sorry!
+      #remove this in production
+      - tock_https_env=false
+      - botadminverticle_body_limit=-1
+      - tock_users=techadmin@app.com,admin@app.com,user@app.com,botUser@app.com,faqUser@app.com,nlpUserOnly@app.com,botUserOnly@app.com,faqNlpUserOnly@app.com,faqBotUserOnly@app.com,adminOnly@app.com,techadminOnly@app.com
+      - tock_passwords=password,password,password,password,password,password,password,password,password,password,password
+      - tock_roles=nlpUser|botUser|faqNlpUser|faqBotUser|admin|technicalAdmin,nlpUser|botUser|faqNlpUser|faqBotUser|admin,nlpUser|botUser|faqNlpUser|faqBotUser,nlpUser|botUser,faqNlpUser|faqBotUser,nlpUser,botUser,faqNlpUser,faqBotUser,admin,technicalAdmin
+      - tock_organizations=app,app,app,app,app,app,app,app,app,app,app
+      - tock_default_log_level=debug
+      - tock_service_log_level=debug
+#      - tock_database_log_level=warn
+    ports:
+      - "80:8080"
+
+  nlp_api:
+    image: "${PLATFORM}tock/nlp_api:${TAG}"
+    depends_on:
+      - mongo
+      - mongo2
+      - mongo3
+      - duckling
+    environment:
+      - no_proxy=duckling #Prevent traffic from using environment proxy
+      - NO_PROXY=duckling
+      - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
+      - nlp_duckling_url=http://duckling:8080
+      - tock_env=prod
+      - tock_web_use_default_cors_handler=true
+      - tock_web_use_default_cors_handler_with_credentials=false
+      - tock_web_use_default_cors_handler_url=*
+#      - tock_default_log_level=warn
+#      - tock_service_log_level=info
+#      - tock_database_log_level=warn
+    ports:
+      - "8888:8080"
+
+  bot_api:
+    image: "${PLATFORM}tock/bot_api:${TAG}"
+    depends_on:
+      - mongo
+      - mongo2
+      - mongo3
+      - nlp_api
+    environment:
+      - no_proxy=nlp_api #Prevent traffic from using environment proxy
+      - NO_PROXY=nlp_api
+      - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
+      - tock_nlp_service_url=http://nlp_api:8080
+      - tock_env=integ
+      - tock_websocket_enabled=true
+      - tock_gen_ai_orchestrator_secret_storage_type=Raw
+      - tock_gen_ai_orchestrator_server_url=http://gen_ai_orchestrator-server:8000
+      - tock_gen_ai_orchestrator_client_request_timeout_ms=55000
+      - tock_gen_ai_orchestrator_technical_error=Technical error :( sorry!
+      - tock_gen_ai_orchestrator_document_number_neighbors=1
+      - tock_gen_ai_orchestrator_dialog_number_messages=5
+      - tock_gen_ai_orchestrator_rag_debug_enabled=false
+#      - tock_default_log_level=warn
+#      - tock_service_log_level=info
+#      - tock_database_log_level=warn
+    ports:
+      - "8080:8080"
+
+  opensearch-node1:
+    image: "${PLATFORM}opensearchproject/opensearch:${OPENSEARCH}"
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node1
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    volumes:
+      - opensearch-data1:/usr/share/opensearch/data
+    ports:
+      - 9200:9200
+      - 9600:9600 # required for Performance Analyzer
+
+  opensearch-node2:
+    image: "${PLATFORM}opensearchproject/opensearch:${OPENSEARCH}"
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node2
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data2:/usr/share/opensearch/data
+
+  opensearch-dashboards:
+    image: "${PLATFORM}opensearchproject/opensearch-dashboards:${OPENSEARCH}"
+    ports:
+      - 5601:5601
+    expose:
+      - "5601"
+    environment:
+      OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
+
+  gen_ai_orchestrator-server:
+    image: "${PLATFORM}tock/gen-ai-orchestrator-server:${TAG}"
+    ports:
+      - "8000:8000"
+    environment:
+      no_proxy: langfuse-server
+      NO_PROXY: langfuse-server
+      tock_gen_ai_orchestrator_application_environment: DEV
+      tock_gen_ai_orchestrator_open_search_host: opensearch-node1
+      tock_gen_ai_orchestrator_open_search_port: 9200
+      tock_gen_ai_orchestrator_open_search_pwd: admin
+      tock_gen_ai_orchestrator_open_search_user: admin
+      tock_gen_ai_orchestrator_open_search_timeout: 5
+      tock_gen_ai_orchestrator_llm_provider_timeout: 120
+      tock_gen_ai_orchestrator_llm_provider_max_retries: 0
+      tock_gen_ai_orchestrator_em_provider_timeout: 120
+      tock_gen_ai_orchestrator_observability_provider_timeout: 120
+      tock_gen_ai_orchestrator_observability_provider_max_retries: 0
+      tock_gen_ai_orchestrator_observability_proxy_server: None
+      tock_gen_ai_orchestrator_observability_proxy_server_authorization_header_name: None
+
+  # Copy from https://github.com/langfuse/langfuse/blob/main/docker-compose.yml
+  langfuse-server:
+    image: ${PLATFORM}langfuse/langfuse:latest
+    depends_on:
+      - langfuse-db
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@langfuse-db:5432/postgres
+      - NEXTAUTH_SECRET=mysecret
+      - SALT=mysalt
+      - NEXTAUTH_URL=http://localhost:3000
+      - TELEMETRY_ENABLED=${TELEMETRY_ENABLED:-true}
+      - LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES=${LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES:-false}
+
+  langfuse-db:
+    image: ${PLATFORM}postgres:latest
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - database_data:/var/lib/postgresql/data
+
+
+volumes:
+  tockmongo:
+  tockmongo2:
+  tockmongo3:
+
+  opensearch-data1:
+  opensearch-data2:
+  database_data:
+    driver: local
