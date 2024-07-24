@@ -32,12 +32,6 @@
     <dependencies>
         <dependency>
             <groupId>ai.tock</groupId>
-            <artifactId>tock-nlp-admin-web</artifactId>
-            <type>zip</type>
-            <classifier>web</classifier>
-        </dependency>
-        <dependency>
-            <groupId>ai.tock</groupId>
             <artifactId>tock-nlp-api-doc</artifactId>
             <type>zip</type>
             <classifier>web</classifier>

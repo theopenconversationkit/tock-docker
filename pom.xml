@@ -70,13 +70,6 @@
             </dependency>
             <dependency>
                 <groupId>ai.tock</groupId>
-                <artifactId>tock-nlp-admin-web</artifactId>
-                <type>zip</type>
-                <classifier>web</classifier>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
                 <artifactId>tock-nlp-api-doc</artifactId>
                 <type>zip</type>
                 <classifier>web</classifier>
