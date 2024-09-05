@@ -237,6 +237,8 @@ services:
       tock_gen_ai_orchestrator_open_search_pwd: admin
       tock_gen_ai_orchestrator_open_search_user: admin
       tock_gen_ai_orchestrator_open_search_timeout: 5
+      tock_gen_ai_orchestrator_vector_store_timeout: 5
+      tock_gen_ai_orchestrator_vector_store_provider: OpenSearch
       tock_gen_ai_orchestrator_llm_provider_timeout: 120
       tock_gen_ai_orchestrator_llm_provider_max_retries: 0
       tock_gen_ai_orchestrator_em_provider_timeout: 120
