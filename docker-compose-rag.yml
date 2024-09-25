@@ -112,7 +112,6 @@ services:
       - tock_configuration_bot_default_base_url=http://bot_api:8080
       - tock_gen_ai_orchestrator_server_url=http://gen_ai_orchestrator-server:8000
       - tock_gen_ai_orchestrator_client_request_timeout_ms=55000
-      - tock_gen_ai_orchestrator_secret_storage_type=Raw
       - tock_gen_ai_orchestrator_technical_error=Technical error :( sorry!
       #remove this in production
       - tock_https_env=false
