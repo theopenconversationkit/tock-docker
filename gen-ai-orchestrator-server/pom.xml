@@ -50,7 +50,6 @@
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
-                    <verbose>true</verbose>
                     <images>
                         <image>
                             <name>tock/gen-ai-orchestrator-server:${project.version}</name>
