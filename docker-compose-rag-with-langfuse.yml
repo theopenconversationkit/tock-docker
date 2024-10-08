@@ -245,8 +245,6 @@ services:
       tock_gen_ai_orchestrator_em_provider_timeout: 120
       tock_gen_ai_orchestrator_observability_provider_timeout: 120
       tock_gen_ai_orchestrator_observability_provider_max_retries: 0
-      tock_gen_ai_orchestrator_observability_proxy_server: None
-      tock_gen_ai_orchestrator_observability_proxy_server_authorization_header_name: None
 
   # Copy from https://github.com/langfuse/langfuse/blob/main/docker-compose.yml
   langfuse-server:
