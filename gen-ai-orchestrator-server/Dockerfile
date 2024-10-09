@@ -1,4 +1,11 @@
-FROM python:3.11-alpine
+FROM python:3.11-slim
+
+# Mettre à jour le système et installer libpq-dev et autres dépendances utiles
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    build-essential \
+    gcc \
+    && rm -rf /var/lib/apt/lists/* \
 
 WORKDIR /app
 

@@ -3,10 +3,9 @@
 # We recommande having at least 40Gb free space on your disk to prevent this error : https://stackoverflow.com/a/67767478
 #   If you have less and something goes wrong at the cluster boot check that you don't have any logs "high disk watermark [90%] exceeded"
 #   if so make some free space a few Gb until this error desapear.
-version: '3'
+version: "3"
 
 services:
-
   mongo:
     image: "${PLATFORM}mongo:${MONGO}"
     volumes:
@@ -54,7 +53,7 @@ services:
       - MONGO2=mongo2
       - MONGO3=mongo3
       - RS=tock
-    entrypoint: [ "/scripts/setup.sh" ]
+    entrypoint: ["/scripts/setup.sh"]
 
   build_worker:
     image: "${PLATFORM}tock/build_worker:${TAG}"
@@ -85,9 +84,9 @@ services:
     environment:
       - tock_env=prod
       - tock_kotlin_compiler_classpath=/maven
-#      - tock_default_log_level=warn
-#      - tock_service_log_level=info
-#      - tock_database_log_level=warn
+    #      - tock_default_log_level=warn
+    #      - tock_service_log_level=info
+    #      - tock_database_log_level=warn
     expose:
       - "8080"
 
@@ -122,7 +121,8 @@ services:
       - tock_organizations=app,app,app,app,app,app,app,app
       - tock_default_log_level=debug
       - tock_service_log_level=debug
-#      - tock_database_log_level=warn
+      - tock_gen_ai_orchestrator_vector_store_provider=PGVector
+    #      - tock_database_log_level=warn
     ports:
       - "80:8080"
 
@@ -142,9 +142,9 @@ services:
       - tock_web_use_default_cors_handler=true
       - tock_web_use_default_cors_handler_with_credentials=false
       - tock_web_use_default_cors_handler_url=*
-#      - tock_default_log_level=warn
-#      - tock_service_log_level=info
-#      - tock_database_log_level=warn
+    #      - tock_default_log_level=warn
+    #      - tock_service_log_level=info
+    #      - tock_database_log_level=warn
     ports:
       - "8888:8080"
 
@@ -168,62 +168,25 @@ services:
       - tock_gen_ai_orchestrator_document_number_neighbors=1
       - tock_gen_ai_orchestrator_dialog_number_messages=5
       - tock_gen_ai_orchestrator_rag_debug_enabled=false
-      - tock_gen_ai_orchestrator_vector_store_provider=OpenSearch
-#      - tock_default_log_level=warn
-#      - tock_service_log_level=info
-#      - tock_database_log_level=warn
+      - tock_gen_ai_orchestrator_vector_store_provider=PGVector
+    #      - tock_default_log_level=warn
+    #      - tock_service_log_level=info
+    #      - tock_database_log_level=warn
     ports:
       - "8080:8080"
 
-  opensearch-node1:
-    image: "${PLATFORM}opensearchproject/opensearch:${OPENSEARCH}"
-    environment:
-      - cluster.name=opensearch-cluster
-      - node.name=opensearch-node1
-      - discovery.seed_hosts=opensearch-node1,opensearch-node2
-      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
-      - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
-        hard: 65536
-    volumes:
-      - opensearch-data1:/usr/share/opensearch/data
+  pgvector_postgres:
+    image: "${PLATFORM}pgvector/pgvector:pg16"
     ports:
-      - 9200:9200
-      - 9600:9600 # required for Performance Analyzer
-
-  opensearch-node2:
-    image: "${PLATFORM}opensearchproject/opensearch:${OPENSEARCH}"
+      - 5433:5432
+    restart: always
     environment:
-      - cluster.name=opensearch-cluster
-      - node.name=opensearch-node2
-      - discovery.seed_hosts=opensearch-node1,opensearch-node2
-      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
-      - bootstrap.memory_lock=true
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=ChangeMe
     volumes:
-      - opensearch-data2:/usr/share/opensearch/data
-
-  opensearch-dashboards:
-    image: "${PLATFORM}opensearchproject/opensearch-dashboards:${OPENSEARCH}"
-    ports:
-      - 5601:5601
-    expose:
-      - "5601"
-    environment:
-      OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
+      - pgvector-postgres-vl:/var/lib/postgresql/data
+      - ./scripts/pgvector/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   gen_ai_orchestrator-server:
     image: "${PLATFORM}tock/gen-ai-orchestrator-server:${TAG}"
@@ -234,13 +197,15 @@ services:
       tock_gen_ai_orchestrator_em_provider_timeout: 120
       tock_gen_ai_orchestrator_llm_provider_timeout: 120
       tock_gen_ai_orchestrator_llm_provider_max_retries: 0
-      tock_gen_ai_orchestrator_vector_store_provider: OpenSearch
-      tock_gen_ai_orchestrator_vector_store_host: opensearch-node1
-      tock_gen_ai_orchestrator_vector_store_port: 9200
-      tock_gen_ai_orchestrator_vector_store_user: admin
-      tock_gen_ai_orchestrator_vector_store_pwd: admin
-      tock_gen_ai_orchestrator_vector_store_database:
+      tock_gen_ai_orchestrator_vector_store_provider: PGVector
+      tock_gen_ai_orchestrator_vector_store_host: pgvector_postgres
+      tock_gen_ai_orchestrator_vector_store_port: 5432
+      tock_gen_ai_orchestrator_vector_store_user: postgres
+      tock_gen_ai_orchestrator_vector_store_pwd: ChangeMe
+      tock_gen_ai_orchestrator_vector_store_database: postgres
       tock_gen_ai_orchestrator_vector_store_timeout: 5
+      tock_gen_ai_orchestrator_vector_store_k: 4
+      tock_gen_ai_orchestrator_vector_store_test_query: virement bancaire
       tock_gen_ai_orchestrator_vector_store_secret_manager_provider:
       tock_gen_ai_orchestrator_vector_store_credentials_secret_name:
 
@@ -249,5 +214,5 @@ volumes:
   tockmongo2:
   tockmongo3:
 
-  opensearch-data1:
-  opensearch-data2:
+  pgvector-postgres-vl:
+    driver: local

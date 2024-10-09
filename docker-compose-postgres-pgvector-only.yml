@@ -1,0 +1,26 @@
+# Copy from https://github.com/langfuse/langfuse/blob/main/docker-compose.yml
+
+version: "3"
+services:
+  pgvector_postgres:
+    hostname: 127.0.0.1
+    image: pgvector/pgvector:pg16
+    ports:
+      - 5433:5432
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=ChangeMe
+    volumes:
+      - pgvector-postgres-vl:/var/lib/postgresql/data
+      - ./scripts/pgvector/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      pgvector-postgres-net:
+
+volumes:
+  pgvector-postgres-vl:
+    driver: local
+
+networks:
+  pgvector-postgres-net:

@@ -122,6 +122,7 @@ services:
       - tock_organizations=app,app,app,app,app,app,app,app
       - tock_default_log_level=debug
       - tock_service_log_level=debug
+      - tock_gen_ai_orchestrator_vector_store_provider=OpenSearch
 #      - tock_database_log_level=warn
     ports:
       - "80:8080"
@@ -184,6 +185,7 @@ services:
       - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}  # Sets the demo admin user password when using demo configuration, required for OpenSearch 2.12 and later
     ulimits:
       memlock:
         soft: -1
@@ -206,6 +208,7 @@ services:
       - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
       - bootstrap.memory_lock=true
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}  # Sets the demo admin user password when using demo configuration, required for OpenSearch 2.12 and later
     ulimits:
       memlock:
         soft: -1
@@ -241,6 +244,8 @@ services:
       tock_gen_ai_orchestrator_vector_store_pwd: admin
       tock_gen_ai_orchestrator_vector_store_database:
       tock_gen_ai_orchestrator_vector_store_timeout: 5
+      tock_gen_ai_orchestrator_vector_store_k: 4
+      tock_gen_ai_orchestrator_vector_store_test_query: virement bancaire
       tock_gen_ai_orchestrator_vector_store_secret_manager_provider:
       tock_gen_ai_orchestrator_vector_store_credentials_secret_name:
 
