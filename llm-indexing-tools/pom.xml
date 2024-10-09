@@ -71,9 +71,6 @@
                                 </buildx>
                             </build>
                             <run>
-                                <ports> <!-- TODO -->
-                                    <port>8000:8000</port>
-                                </ports>
                                 <log>
                                     <prefix>llm_indexing_tools</prefix>
                                     <color>yellow</color>
