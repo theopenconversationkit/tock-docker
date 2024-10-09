@@ -2,11 +2,6 @@ FROM python:3.11-alpine
 
 WORKDIR /app
 
-ENV HTTP_PROXY http://172.17.0.1:3128
-ENV HTTPS_PROXY http://172.17.0.1:3128
-ENV http_proxy http://172.17.0.1:3128
-ENV https_proxy http://172.17.0.1:3128
-
 # --- Install Gen AI server with it's requirements ---
 # Need to have the server because of the model dependency :(
 COPY target/gen_ai_orchestrator gen_ai_orchestrator/

@@ -4,11 +4,6 @@ WORKDIR /app
 
 COPY target/requirements.txt .
 
-ENV HTTP_PROXY http://172.17.0.1:3128
-ENV HTTPS_PROXY http://172.17.0.1:3128
-ENV http_proxy http://172.17.0.1:3128
-ENV https_proxy http://172.17.0.1:3128
-
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY target/gen_ai_orchestrator gen_ai_orchestrator/
