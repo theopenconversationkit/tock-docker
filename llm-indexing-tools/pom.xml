@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ai.tock</groupId>
+        <artifactId>tock-docker</artifactId>
+        <version>24.9.2-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>tock-docker-llm-indexing-tools</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Tock Docker Gen AI (LLM) Indexing Tools</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency> <!-- Toolings requires the server's model so it's in the same build would need to be refactored-->
+            <groupId>ai.tock</groupId>
+            <artifactId>tock-gen-ai-orchestrator-server</artifactId>
+            <type>zip</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-tomcat</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeGroupIds>ai.tock</includeGroupIds>
+                            <includeArtifactIds>tock-gen-ai-orchestrator-server</includeArtifactIds>
+                            <outputDirectory>
+                                ${project.build.directory}
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>tock/llm-indexing-tools:${project.version}</name>
+                            <build>
+                                <network>host</network>
+                                <nocache>true</nocache>
+                                <dockerFileDir>${project.basedir}</dockerFileDir>
+                                <tags>
+                                    <tag>${major}</tag>
+                                    <tag>${latest}</tag>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                                <buildx>
+                                    <builderName>${env.BUILDX_BUILDER}</builderName> <!--Fabric8 doesn't use builder defined in environment variable, enforcing it, see #33 -->
+                                    <platforms>
+                                        <platform>linux/amd64</platform>
+                                        <platform>linux/arm64</platform>
+                                    </platforms>
+                                </buildx>
+                            </build>
+                            <run>
+                                <ports> <!-- TODO -->
+                                    <port>8000:8000</port>
+                                </ports>
+                                <log>
+                                    <prefix>llm_indexing_tools</prefix>
+                                    <color>yellow</color>
+                                </log>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
