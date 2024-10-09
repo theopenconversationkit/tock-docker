@@ -57,6 +57,7 @@
         <module>bot-admin-open-data</module>
         <module>kotlin-compiler</module>
         <module>gen-ai-orchestrator-server</module>
+        <module>llm-indexing-tools</module>
     </modules>
 
     <dependencyManagement>
