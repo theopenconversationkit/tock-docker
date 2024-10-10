@@ -1,5 +1,7 @@
 FROM python:3.11-alpine
 
+RUN apk add build-base linux-headers
+
 WORKDIR /app
 
 # --- Install Gen AI server with it's requirements ---
