@@ -29,9 +29,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>24.9</major>
         <latest>latest</latest>
-        <tock>24.9.7</tock>
-        <bot-open-data>24.9.7</bot-open-data>
-        <stanford>24.9.7</stanford>
+        <tock>24.9.8</tock>
+        <bot-open-data>24.9.8</bot-open-data>
+        <stanford>24.9.8</stanford>
         <demo>24.9.5</demo>
 
         <jackson>2.18.2</jackson>
