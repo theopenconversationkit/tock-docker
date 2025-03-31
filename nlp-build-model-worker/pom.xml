@@ -58,7 +58,7 @@
                         <image>
                             <name>tock/build_worker:${project.version}</name>
                             <build>
-                                <from>amazoncorretto:23-alpine</from>
+                                <from>amazoncorretto:24-alpine</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>
