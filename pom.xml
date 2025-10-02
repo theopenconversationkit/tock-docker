@@ -27,22 +27,22 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <major>25.3-SNAPSHOT</major>
+        <major>25.9-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>25.3.11-SNAPSHOT</tock>
-        <bot-open-data>25.3.11-SNAPSHOT</bot-open-data>
-        <stanford>25.3.11-SNAPSHOT</stanford>
-        <demo>25.3.2</demo>
+        <tock>25.9.0</tock>
+        <bot-open-data>25.9.0</bot-open-data>
+        <stanford>25.9.0</stanford>
+        <demo>25.9.1</demo>
 
-        <jackson>2.19.2</jackson>
-        <jackson-databinding>2.19.2</jackson-databinding>
-        <okhttp>4.12.0</okhttp>
-        <kotlin>2.1.20</kotlin>
+        <jackson>2.20.0</jackson>
+        <jackson-databinding>2.20.0</jackson-databinding>
+        <okhttp>5.1.0</okhttp>
+        <kotlin>2.2.20</kotlin>
 
-        <plugin.docker>0.43.4</plugin.docker>
+        <plugin.docker>0.46.0</plugin.docker>
         <plugin.release>3.1.1</plugin.release>
         <plugin.resources>3.3.0</plugin.resources>
-        <plugin.assembly>3.4.2</plugin.assembly>
+        <plugin.assembly>3.7.1</plugin.assembly>
     </properties>
 
     <modules>
