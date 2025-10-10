@@ -29,14 +29,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>25.9-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>25.9.1-SNAPSHOT</tock>
-        <bot-open-data>25.9.1-SNAPSHOT</bot-open-data>
-        <stanford>25.9.1-SNAPSHOT</stanford>
-        <demo>25.9.1</demo>
+        <tock>25.9.1</tock>
+        <bot-open-data>25.9.1</bot-open-data>
+        <stanford>25.9.1</stanford>
+        <demo>25.9.2</demo>
 
         <jackson>2.20.0</jackson>
         <jackson-databinding>2.20.0</jackson-databinding>
-        <okhttp>5.1.0</okhttp>
+        <okhttp>5.2.1</okhttp>
         <kotlin>2.2.20</kotlin>
 
         <plugin.docker>0.46.0</plugin.docker>
@@ -259,11 +259,11 @@
     </organization>
     <developers>
         <developer>
-            <id>jburet_vsct</id>
+            <id>jburet</id>
             <name>Julien Buret</name>
-            <email>jburet@voyages-sncf.com</email>
+            <email>zigzago@litote.org</email>
             <organization>theopenconversationkit</organization>
-            <organizationUrl>https://www.voyages-sncf.com/</organizationUrl>
+            <organizationUrl>https://doc.tock.ai</organizationUrl>
         </developer>
     </developers>
     <licenses>
