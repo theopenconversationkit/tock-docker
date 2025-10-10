@@ -46,7 +46,7 @@
                         <image>
                             <name>tock/bot_api_webhook:${project.version}</name>
                             <build>
-                                <from>amazoncorretto:24-alpine</from>
+                                <from>amazoncorretto:25-alpine</from>
                                 <assembly>
                                     <inline>
                                         <dependencySets>
