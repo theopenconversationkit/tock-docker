@@ -138,7 +138,8 @@ services:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
       - tock_nlp_service_url=http://nlp_api:8080
       - tock_env=integ
-      - tock_websocket_enabled=true
+      - tock_websocket_enabled=false
+      - tock_web_sse=true
 #      - tock_default_log_level=warn
 #      - tock_service_log_level=info
 #      - tock_database_log_level=warn

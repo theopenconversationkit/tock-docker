@@ -134,6 +134,7 @@ services:
       - tock_nlp_service_url=http://nlp_api:8080
       - tock_env=prod
       - tock_configuration_bot_default_base_url=http://bot_open_data:8080
+      - tock_web_sse=true
 #      - tock_default_log_level=warn
 #      - tock_service_log_level=info
 #      - tock_database_log_level=warn
