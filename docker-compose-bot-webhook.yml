@@ -1,5 +1,3 @@
-version: '3'
-
 services:
 
   mongo:
@@ -9,6 +7,12 @@ services:
     ports:
       - "27017:27017"
     command: --bind_ip_all --port 27017 --replSet "tock"
+    healthcheck:
+      test: [ "CMD-SHELL", "mongosh --host mongo:27017 --quiet --eval 'try { rs.status() } catch(e) { quit(1) }'" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
 
   mongo2:
     image: "${PLATFORM}mongo:${MONGO}"
@@ -19,6 +23,12 @@ services:
     ports:
       - "27018:27018"
     command: --bind_ip_all --port 27018 --replSet "tock"
+    healthcheck:
+      test: [ "CMD-SHELL", "mongosh --host mongo2:27018 --quiet --eval 'try { rs.status() } catch(e) { quit(1) }'" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
 
   mongo3:
     image: "${PLATFORM}mongo:${MONGO}"
@@ -30,6 +40,12 @@ services:
     ports:
       - "27019:27019"
     command: --bind_ip_all --port 27019 --replSet "tock"
+    healthcheck:
+      test: [ "CMD-SHELL", "mongosh --host mongo3:27019 --quiet --eval 'try { rs.status() } catch(e) { quit(1) }'" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
 
   mongo-setup:
     container_name: "mongo-setup"
@@ -54,9 +70,12 @@ services:
   build_worker:
     image: "tock/build_worker:${TAG}"
     depends_on:
-      - mongo
-      - mongo2
-      - mongo3
+      mongo:
+        condition: service_healthy
+      mongo2:
+        condition: service_healthy
+      mongo3:
+        condition: service_healthy
     environment:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
       - tock_env=prod
@@ -86,11 +105,16 @@ services:
   admin_web:
     image: "tock/bot_admin:${TAG}"
     depends_on:
-      - mongo
-      - mongo2
-      - mongo3
-      - duckling
-      - kotlin_compiler
+      mongo:
+        condition: service_healthy
+      mongo2:
+        condition: service_healthy
+      mongo3:
+        condition: service_healthy
+      duckling:
+        condition: service_started
+      kotlin_compiler:
+        condition: service_started
     environment:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
       - nlp_duckling_url=http://duckling:8080
@@ -110,10 +134,14 @@ services:
   nlp_api:
     image: "tock/nlp_api:${TAG}"
     depends_on:
-      - mongo
-      - mongo2
-      - mongo3
-      - duckling
+      mongo:
+        condition: service_healthy
+      mongo2:
+        condition: service_healthy
+      mongo3:
+        condition: service_healthy
+      duckling:
+        condition: service_started
     environment:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
       - nlp_duckling_url=http://duckling:8080
@@ -130,16 +158,23 @@ services:
   bot_api:
     image: "tock/bot_api:${TAG}"
     depends_on:
-      - mongo
-      - mongo2
-      - mongo3
-      - nlp_api
+      mongo:
+        condition: service_healthy
+      mongo2:
+        condition: service_healthy
+      mongo3:
+        condition: service_healthy
+      nlp_api:
+        condition: service_started
     environment:
       - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
       - tock_nlp_service_url=http://nlp_api:8080
       - tock_env=integ
       - tock_websocket_enabled=false
       - tock_web_sse=true
+      - tock_timeline_persistence_synchronous_mode=false
+      - tock_timeline_persistence_asynchronous_mode=true
+      - tock_web_enable_markdown=true
 #      - tock_default_log_level=warn
 #      - tock_service_log_level=info
 #      - tock_database_log_level=warn
@@ -149,9 +184,6 @@ services:
   demo_api_webhook:
     image: "tock/bot_api_webhook:${TAG}"
     depends_on:
-      - mongo
-      - mongo2
-      - mongo3
       - bot_api
     environment:
       - tock_env=integ
@@ -161,7 +193,37 @@ services:
     ports:
       - "8887:8887"
 
+  open_web_ui:
+    image: "ghcr.io/open-webui/open-webui:main"
+    restart: unless-stopped
+    depends_on:
+      - demo_api_webhook
+      - bot_api
+    environment:
+      - PORT=3000
+      - OFFLINE_MODE=True
+      - OPENAI_API_KEY=NONE
+      - OPENAI_API_BASE_URL=http://bot_api:8080/io/app/new_assistant/openai
+      - ENABLE_FORWARD_USER_INFO_HEADERS=true
+    ports:
+      - "3000:3000"
+    volumes:
+      - openwebui_data:/app/backend/data
+
+  web:
+    image: "tock/bot_api_web:${TAG}"
+    depends_on:
+      - demo_api_webhook
+      - bot_api
+    environment:
+      - PORT=3001
+      - WEB_CONNECTOR_PATH=io/app/new_assistant/web
+    ports:
+      - "3001:3001"
+
+
 volumes:
   tockmongo:
   tockmongo2:
   tockmongo3:
+  openwebui_data:

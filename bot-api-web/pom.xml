@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ This file is part of the tock-docker distribution.
+  ~ (https://github.com/theopenconversationkit/tock-docker)
+  ~ Copyright (c) 2017 VSCT.
+  ~
+  ~ tock-corenlp is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as
+  ~ published by the Free Software Foundation, version 3.
+  ~
+  ~ tock-corenlp is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program. If not, see <http://www.gnu.org/licenses />.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ai.tock</groupId>
+        <artifactId>tock-docker</artifactId>
+        <version>25.10.2-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>tock-docker-bot-api-react</artifactId>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>ai.tock</groupId>
+            <artifactId>tock-bot-demo-api-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>tock/bot_api_web:${project.version}</name>
+                            <build>
+                                <from>amazoncorretto:25-alpine</from>
+                                <assembly>
+                                    <inline>
+                                        <dependencySets>
+                                            <dependencySet>
+                                                <useProjectArtifact>false</useProjectArtifact>
+                                                <unpack>false</unpack>
+                                            </dependencySet>
+                                        </dependencySets>
+                                    </inline>
+                                </assembly>
+                                <cmd>
+                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -cp '/maven/*' ApplicationKt</shell>
+                                </cmd>
+                                <tags>
+                                    <tag>${major}</tag>
+                                    <tag>${latest}</tag>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                                <buildx>
+                                    <builderName>${env.BUILDX_BUILDER}</builderName> <!--Fabric8 doesn't use builder defined in environment variable, enforcing it, see #33 -->
+                                    <platforms>
+                                        <platform>linux/amd64</platform>
+                                        <platform>linux/arm64</platform>
+                                    </platforms>
+                                </buildx>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8887:8887</port>
+                                </ports>
+                                <log>
+                                    <prefix>bot_api_web</prefix>
+                                    <color>green</color>
+                                </log>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
