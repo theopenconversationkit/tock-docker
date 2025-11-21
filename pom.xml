@@ -29,10 +29,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>25.10-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>25.10.1</tock>
-        <bot-open-data>25.10.1</bot-open-data>
-        <stanford>25.10.1</stanford>
-        <demo>25.10.0</demo>
+        <tock>25.10.2-SNAPSHOT</tock>
+        <bot-open-data>25.10.2-SNAPSHOT</bot-open-data>
+        <stanford>25.10.2-SNAPSHOT</stanford>
+        <demo>25.10.1-SNAPSHOT</demo>
 
         <jackson>2.20.0</jackson>
         <jackson-databinding>2.20.0</jackson-databinding>
@@ -53,6 +53,7 @@
         <module>bot-admin</module>
         <module>bot-api</module>
         <module>bot-api-webhook</module>
+        <module>bot-api-web</module>
         <module>bot-open-data</module>
         <module>bot-admin-open-data</module>
         <module>kotlin-compiler</module>
@@ -141,6 +142,11 @@
             <dependency>
                 <groupId>ai.tock</groupId>
                 <artifactId>tock-bot-demo-api-webhook</artifactId>
+                <version>${demo}</version>
+            </dependency>
+            <dependency>
+                <groupId>ai.tock</groupId>
+                <artifactId>tock-bot-demo-api-web</artifactId>
                 <version>${demo}</version>
             </dependency>
 

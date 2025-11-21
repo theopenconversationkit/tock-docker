@@ -64,6 +64,32 @@ In order to reach the mongo database from a client
     #launch the stack
     docker-compose -f docker-compose-bot.yml up
 ``` 
+
+### Run the Bot API stack + Open WebUI: docker-compose-bot-webhook.yml
+
+```sh 
+    #get the last docker-compose-bot file
+    curl -o docker-compose-bot-webhook.yml https://raw.githubusercontent.com/theopenconversationkit/tock-docker/master/docker-compose-bot-webhook.yml
+    #get the script to start mongo in replicaset mode
+    mkdir -p scripts && curl -o scripts/setup.sh https://raw.githubusercontent.com/theopenconversationkit/tock-docker/master/scripts/setup.sh && chmod +x scripts/setup.sh
+    #get the last tag
+    curl -o .env https://raw.githubusercontent.com/theopenconversationkit/tock-docker/master/.env
+    #launch the stack
+    docker-compose -f docker-compose-bot.yml up
+``` 
+
+- Then you have to setup:
+  - a first app
+  - a web connector (io/app/new_assistant/web)
+  - an Open AI connector (io/app/new_assistant/openai)
+  - Set the webhook to (http://demo_api_webhook:8887)
+  - and add intents *greetings*, *stream*, *card*, *carousel* and *web*.
+
+And then you can test:
+
+- [Open WebUI](https://openwebui.com/) at http://localhost:3000 - you have to create and admin account
+- A demo of [Tock React Kit](https://github.com/theopenconversationkit/tock-react-kit) at http://localhost:3001
+
 ### Run the Open Data Bot example: docker-compose-bot-open-data.yml
 
 This docker-compose file starts the NLP stack with the [Open Data Bot](https://github.com/theopenconversationkit/tock-bot-open-data).
