@@ -95,7 +95,7 @@ services:
       # Postgres Langfuse
       DATABASE_URL: postgresql://langfuse:ChangeMe@langfuse_postgres:5432/langfuse
 
-      # Secrets (CHANGEME en prod)
+      # Secrets
       SALT: mysalt
       # Generate via `openssl rand -hex 32`
       ENCRYPTION_KEY: CHANGEME
