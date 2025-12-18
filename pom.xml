@@ -22,7 +22,7 @@
 
     <groupId>ai.tock</groupId>
     <artifactId>tock-docker</artifactId>
-    <version>25.10.3-SNAPSHOT</version>
+    <version>25.10.3</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -285,7 +285,7 @@
         <connection>scm:git:git@github.com:theopenconversationkit/tock-docker.git</connection>
         <developerConnection>scm:git:git@github.com:theopenconversationkit/tock-docker.git</developerConnection>
         <url>git@github.com:theopenconversationkit/tock-docker.git</url>
-        <tag>HEAD</tag>
+        <tag>tock-25.10.3</tag>
     </scm>
 
     <repositories>
