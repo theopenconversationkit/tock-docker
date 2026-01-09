@@ -75,7 +75,7 @@ In order to reach the mongo database from a client
     #get the last tag
     curl -o .env https://raw.githubusercontent.com/theopenconversationkit/tock-docker/master/.env
     #launch the stack
-    docker-compose -f docker-compose-bot.yml up
+    docker-compose -f docker-compose-bot-webhook.yml up
 ``` 
 
 - Then you have to setup:
