@@ -6,80 +6,6 @@
 version: "3"
 
 services:
-  mongo:
-    image: "${PLATFORM}mongo:${MONGO}"
-    volumes:
-      - tockmongo:/data/db
-    ports:
-      - "27017:27017"
-    command: --bind_ip_all --port 27017 --replSet "tock"
-
-  mongo2:
-    image: "${PLATFORM}mongo:${MONGO}"
-    depends_on:
-      - mongo
-    volumes:
-      - tockmongo2:/data/db
-    ports:
-      - "27018:27018"
-    command: --bind_ip_all --port 27018 --replSet "tock"
-
-  mongo3:
-    image: "${PLATFORM}mongo:${MONGO}"
-    depends_on:
-      - mongo
-      - mongo2
-    volumes:
-      - tockmongo3:/data/db
-    ports:
-      - "27019:27019"
-    command: --bind_ip_all --port 27019 --replSet "tock"
-
-  mongo-setup:
-    image: "${PLATFORM}mongo:${MONGO}"
-    depends_on:
-      - "mongo"
-      - "mongo2"
-      - "mongo3"
-    links:
-      - mongo:mongo
-      - mongo2:mongo2
-      - mongo3:mongo3
-    volumes:
-      - ./scripts:/scripts
-    environment:
-      - MONGO1=mongo
-      - MONGO2=mongo2
-      - MONGO3=mongo3
-      - RS=tock
-    entrypoint: [ "/scripts/setup.sh" ]
-
-  build_worker:
-    image: "${PLATFORM}tock/build_worker:${TAG}"
-    depends_on:
-      - mongo
-      - mongo2
-      - mongo3
-    environment:
-      - tock_mongo_url=mongodb://mongo:27017,mongo2:27018,mongo3:27019/?replicaSet=tock
-      - tock_env=prod
-      - JAVA_ARGS=-Xmx1g -XX:MaxMetaspaceSize=256m
-
-  duckling:
-    image: "${PLATFORM}tock/duckling:${TAG}"
-    environment:
-      - tock_env=prod
-    expose:
-      - "8080"
-
-  kotlin_compiler:
-    image: "${PLATFORM}tock/kotlin_compiler:${TAG}"
-    environment:
-      - tock_env=prod
-      - tock_kotlin_compiler_classpath=/maven
-    ports:
-      - "8887:8080"
-
   langfuse-worker:
     image: docker.io/langfuse/langfuse-worker:3
     restart: always
@@ -139,7 +65,8 @@ services:
       NEXTAUTH_SECRET: mysecret
 
   clickhouse:
-    image: docker.io/clickhouse/clickhouse-server
+    image: docker.io/clickhouse/clickhouse-server:25.8
+    user: "101:101"
     restart: always
     environment:
       CLICKHOUSE_DB: default
@@ -164,20 +91,8 @@ services:
     image: docker.io/redis:7
     restart: always
     command: >
-
-  pgvector_postgres:
-    image: "${PLATFORM}pgvector/pgvector:pg16"
-    ports:
-      - 5433:5432
-    restart: always
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=ChangeMe
-    volumes:
-      - pgvector-postgres-vl:/var/lib/postgresql/data
-      - ./scripts/pgvector/init.sql:/docker-entrypoint-initdb.d/init.sql
-
+      --requirepass ${REDIS_AUTH:-myredissecret}
+      --maxmemory-policy noeviction
   langfuse_postgres:
     image: "${PLATFORM}pgvector/pgvector:pg16"
     ports:
@@ -191,15 +106,8 @@ services:
       - langfuse-postgres-vl:/var/lib/postgresql/data
 
 volumes:
-  tockmongo:
-  tockmongo2:
-  tockmongo3:
-
-  pgvector-postgres-vl:
-    driver: local
   langfuse-postgres-vl:
     driver: local
-
   langfuse_clickhouse_data:
     driver: local
   langfuse_clickhouse_logs:
