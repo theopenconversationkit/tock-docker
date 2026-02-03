@@ -1,0 +1,116 @@
+# WARNING to run this you need to ensure that vm.max_map_count is correctly configured
+# See https://opensearch.org/docs/latest/install-and-configure/install-opensearch/docker#important-host-settings
+# We recommande having at least 40Gb free space on your disk to prevent this error : https://stackoverflow.com/a/67767478
+#   If you have less and something goes wrong at the cluster boot check that you don't have any logs "high disk watermark [90%] exceeded"
+#   if so make some free space a few Gb until this error desapear.
+version: "3"
+
+services:
+  langfuse-worker:
+    image: docker.io/langfuse/langfuse-worker:3
+    restart: always
+    depends_on:
+      - langfuse_postgres
+      - clickhouse
+      - minio
+      - redis
+    environment: &langfuse_env
+      # UI Langfuse
+      NEXTAUTH_URL: http://localhost:3000
+
+      # Postgres Langfuse
+      DATABASE_URL: postgresql://langfuse:ChangeMe@langfuse_postgres:5432/langfuse
+
+      # Secrets
+      SALT: mysalt
+      # Generate via `openssl rand -hex 32`
+      ENCRYPTION_KEY: CHANGEME
+
+      TELEMETRY_ENABLED: "true"
+      LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: "false"
+
+      # Clickhouse
+      CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+      CLICKHOUSE_URL: http://clickhouse:8123
+      CLICKHOUSE_USER: clickhouse
+      CLICKHOUSE_PASSWORD: clickhouse
+      CLICKHOUSE_CLUSTER_ENABLED: "false"
+
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_AUTH: myredissecret
+
+      # S3 / Minio
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: miniosecret
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+      LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
+
+  langfuse-web:
+    image: docker.io/langfuse/langfuse:3
+    restart: always
+    depends_on:
+      - langfuse_postgres
+      - clickhouse
+      - minio
+      - redis
+    ports:
+      - "3000:3000"
+    environment:
+      <<: *langfuse_env
+      NEXTAUTH_SECRET: mysecret
+
+  clickhouse:
+    image: docker.io/clickhouse/clickhouse-server:25.8
+    user: "101:101"
+    restart: always
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: clickhouse
+      CLICKHOUSE_PASSWORD: clickhouse
+    volumes:
+      - langfuse_clickhouse_data:/var/lib/clickhouse
+      - langfuse_clickhouse_logs:/var/log/clickhouse-server
+
+  minio:
+    image: docker.io/minio/minio
+    restart: always
+    entrypoint: sh
+    command: -c 'mkdir -p /data/langfuse && minio server --address ":9000" --console-address ":9001" /data'
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: miniosecret
+    volumes:
+      - langfuse_minio_data:/data
+
+  redis:
+    image: docker.io/redis:7
+    restart: always
+    command: >
+      --requirepass ${REDIS_AUTH:-myredissecret}
+      --maxmemory-policy noeviction
+  langfuse_postgres:
+    image: "${PLATFORM}pgvector/pgvector:pg16"
+    ports:
+      - 5439:5432
+    restart: always
+    environment:
+      - POSTGRES_DB=langfuse
+      - POSTGRES_USER=langfuse
+      - POSTGRES_PASSWORD=ChangeMe
+    volumes:
+      - langfuse-postgres-vl:/var/lib/postgresql/data
+
+volumes:
+  langfuse-postgres-vl:
+    driver: local
+  langfuse_clickhouse_data:
+    driver: local
+  langfuse_clickhouse_logs:
+    driver: local
+  langfuse_minio_data:
+    driver: local
