@@ -189,7 +189,6 @@ services:
       - POSTGRES_PASSWORD=ChangeMe
     volumes:
       - langfuse-postgres-vl:/var/lib/postgresql/data
-      - ./scripts/langfuse-init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   tockmongo:
