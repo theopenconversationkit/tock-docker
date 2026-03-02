@@ -34,7 +34,7 @@
         <stanford>25.10.7</stanford>
         <demo>25.10.5</demo>
 
-        <jackson>2.20.0</jackson>
+        <jackson>2.21.1</jackson>
         <jackson-databinding>2.20.0</jackson-databinding>
         <okhttp>5.2.1</okhttp>
         <kotlin>2.2.20</kotlin>
