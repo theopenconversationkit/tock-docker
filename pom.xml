@@ -27,9 +27,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <major>25.10-SNAPSHOT</major>
+        <major>26.3-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>26.3.0</tock>
+        <tock>26.3.1-SNAPSHOT</tock>
         <bot-open-data>26.3.0</bot-open-data>
         <stanford>26.3.0</stanford>
         <demo>26.3.0</demo>
@@ -39,7 +39,8 @@
         <okhttp>5.3.2</okhttp>
         <kotlin>2.3.10</kotlin>
 
-        <plugin.docker>0.48.1</plugin.docker>
+        <!-- do not update this plugin version -->
+        <plugin.docker>0.46.0</plugin.docker>
         <plugin.release>3.3.1</plugin.release>
         <plugin.resources>3.3.0</plugin.resources>
         <plugin.assembly>3.8.0</plugin.assembly>
