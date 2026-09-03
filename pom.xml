@@ -38,6 +38,7 @@
         <jackson-databinding>2.22.0</jackson-databinding>
         <okhttp>5.4.0</okhttp>
         <kotlin>2.4.0</kotlin>
+        <logback>8.1</logback>
 
         <!-- do not update this plugin version -->
         <plugin.docker>0.46.0</plugin.docker>
@@ -204,6 +205,11 @@
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-reflect</artifactId>
                 <version>${kotlin}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logback}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

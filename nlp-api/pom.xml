@@ -42,6 +42,10 @@
             <groupId>ai.tock</groupId>
             <artifactId>tock-nlp-model-rasa</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -68,11 +72,23 @@
                                                 <source>logback.xml</source>
                                                 <outputDirectory>.</outputDirectory>
                                             </file>
+                                            <file>
+                                                <source>logback-gcp.xml</source>
+                                                <outputDirectory>.</outputDirectory>
+                                            </file>
                                         </files>
                                     </inline>
                                 </assembly>
                                 <cmd>
-                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dlogback.configurationFile='file:///maven/logback.xml' -cp '/maven/*' ai.tock.nlp.api.StartNlpServiceKt</shell>
+                                    <!--
+                                      TOCK_LOG_PROFILE (optional) selects the logback file to load, so the same
+                                      image can be used on GCP / AWS / on-prem without rebuilding. When undefined
+                                      (or empty) => /maven/logback.xml (current behavior, unchanged). When defined,
+                                      e.g. TOCK_LOG_PROFILE=gcp => /maven/logback-gcp.xml. Each variant must be
+                                      declared in the <files> section below and must be a standalone, complete
+                                      logback.xml configuration.
+                                    -->
+                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dlogback.configurationFile="file:///maven/logback${TOCK_LOG_PROFILE:+-$TOCK_LOG_PROFILE}.xml" -cp '/maven/*' ai.tock.nlp.api.StartNlpServiceKt</shell>
                                 </cmd>
                                 <tags>
                                     <tag>${major}</tag>
