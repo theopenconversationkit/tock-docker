@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Tock — logback.xml for Google Cloud Logging (GKE).
+
+  ⚠ MANDATORY PREREQUISITE: this file is NOT loaded unless the following
+    environment variable is set on the container:
+
+        tock_logback_enabled = false
+
+    Tock registers its own ch.qos.logback.classic.spi.Configurator
+    (ai.tock.shared.LogbackConfigurator, declared in the tock-shared SPI).
+    Logback 1.3+ executes ServiceLoader Configurators BEFORE the
+    DefaultJoranConfigurator, which is the only one that reads
+    -Dlogback.configurationFile.
+    Tock's Configurator returns DO_NOT_INVOKE_NEXT_IF_ANY: the chain stops
+    there and the XML is never loaded. `tock_logback_enabled=false` makes it
+    return INVOKE_NEXT_IF_ANY and hands control back to this file.
+
+  ⚠ CONSEQUENCE: disabling LogbackConfigurator also removes the safeguards
+    it enforced (org.mongodb.driver / io.netty / okhttp3 capped at INFO,
+    and the LevelChangePropagator for the JUL bridge).
+    They are restored below. With tock_default_log_level=DEBUG, forgetting
+    them would flood the logs with Netty and OkHttp traffic.
+
+  DEPENDENCY: net.logstash.logback:logstash-logback-encoder:8.1
+    (to be added to the <dependencies> of the tock-docker-bot-api module:
+     the fabric8 assembly <dependencySets> will place it in /maven)
+    ⚠ Not 9.0: it requires Jackson >= 3.0.0, while Tock uses Jackson 2.22.0.
+
+  Unchanged loading: -Dlogback.configurationFile='file:///maven/logback.xml'
+-->
+<configuration>
+
+    <!-- Restored: without it, the java.util.logging bridge no longer follows the log levels -->
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <variable name="tock_default_log_level" value="${tock_default_log_level:-warn}" />
+    <variable name="tock_service_log_level" value="${tock_service_log_level:-info}" />
+    <variable name="tock_database_log_level" value="${tock_database_log_level:-warn}" />
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+
+                <!-- Promoted to LogEntry.timestamp by the GKE agent -->
+                <timestamp>
+                    <fieldName>time</fieldName>
+                    <pattern>[ISO_OFFSET_DATE_TIME]</pattern>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+
+                <!--
+                  THE missing field today: without it, the agent ignores the
+                  content and applies stdout -> INFO, stderr -> ERROR.
+                  LogSeverity does not know WARN (it is WARNING) or TRACE.
+                  Valid values: DEBUG INFO NOTICE WARNING ERROR CRITICAL ALERT EMERGENCY
+                -->
+                <pattern>
+                    <omitEmptyFields>true</omitEmptyFields>
+                    <pattern>
+                        {"severity":"%replace(%replace(%level){'WARN','WARNING'}){'TRACE','DEBUG'}"}
+                    </pattern>
+                </pattern>
+
+                <message><fieldName>message</fieldName></message>
+                <loggerName><fieldName>logger</fieldName></loggerName>
+                <threadName><fieldName>thread</fieldName></threadName>
+
+                <!-- ONE GCP entry per exception, instead of one per stack trace line -->
+                <stackTrace>
+                    <fieldName>stack_trace</fieldName>
+                    <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+                        <maxDepthPerThrowable>40</maxDepthPerThrowable>
+                        <maxLength>8192</maxLength>
+                        <rootCauseFirst>true</rootCauseFirst>
+                        <exclude>^java\.util\.concurrent\.ThreadPoolExecutor\.runWorker</exclude>
+                    </throwableConverter>
+                </stackTrace>
+
+                <mdc/>
+
+            </providers>
+        </encoder>
+    </appender>
+
+    <logger name="ai.tock" level="${tock_service_log_level}" />
+    <!--    <logger name="ai.tock.bot.api" level="debug" />-->
+    <logger name="org.mongodb" level="${tock_database_log_level}" />
+
+    <!--
+      Restored from LogbackConfigurator.kt (lines 95-119): these three
+      loggers were capped at INFO there whenever the default level was
+      INFO or below. Essential with tock_default_log_level=DEBUG.
+    -->
+    <logger name="org.mongodb.driver" level="INFO" />
+    <logger name="io.netty" level="INFO" />
+    <logger name="okhttp3" level="INFO" />
+
+    <root level="${tock_default_log_level}">
+        <appender-ref ref="console" />
+    </root>
+
+</configuration>
