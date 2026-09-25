@@ -29,22 +29,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>26.3-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>26.3.4</tock>
-        <bot-open-data>26.3.4</bot-open-data>
-        <stanford>26.3.4</stanford>
-        <demo>26.3.4</demo>
+        <tock>26.3.5-SNAPSHOT</tock>
+        <bot-open-data>26.3.5-SNAPSHOT</bot-open-data>
+        <stanford>26.3.5-SNAPSHOT</stanford>
+        <demo>26.3.5-SNAPSHOT</demo>
 
-        <jackson>2.22.0</jackson>
-        <jackson-databinding>2.22.0</jackson-databinding>
-        <okhttp>5.4.0</okhttp>
-        <kotlin>2.4.0</kotlin>
-        <logback>8.1</logback>
+        <!-- versions of Tock dependencies come from ai.tock:tock-bom, only the other dependencies are listed here -->
+        <logstash-logback-encoder>9.0</logstash-logback-encoder>
 
         <!-- do not update this plugin version -->
         <plugin.docker>0.46.0</plugin.docker>
         <plugin.release>3.3.1</plugin.release>
         <plugin.resources>3.5.0</plugin.resources>
         <plugin.assembly>3.8.0</plugin.assembly>
+        <plugin.clean>3.5.0</plugin.clean>
+        <plugin.enforcer>3.6.3</plugin.enforcer>
 
         <maven.version.ignore>(?i).*-(alpha|beta|m|rc)([-.]?\d+)?</maven.version.ignore>
     </properties>
@@ -67,66 +66,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Versions of Tock artifacts and of their dependencies (Netty, Jackson, Kotlin...) -->
             <dependency>
                 <groupId>ai.tock</groupId>
-                <artifactId>tock-nlp-duckling-service</artifactId>
-                <type>zip</type>
-                <classifier>dependencies</classifier>
+                <artifactId>tock-bom</artifactId>
                 <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>tock-nlp-api-doc</artifactId>
-                <type>zip</type>
-                <classifier>web</classifier>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>tock-nlp-admin-server</artifactId>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>tock-bot-admin-web</artifactId>
-                <type>zip</type>
-                <classifier>web</classifier>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>tock-bot-admin-server</artifactId>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>tock-nlp-build-model-worker</artifactId>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>tock-nlp-build-model-worker-on-aws-batch</artifactId>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>tock-nlp-api-service</artifactId>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>tock-bot-api-service</artifactId>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>tock-bot-admin-kotlin-compiler-server</artifactId>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>bot-toolkit</artifactId>
-                <version>${tock}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>ai.tock</groupId>
@@ -140,11 +86,6 @@
             </dependency>
             <dependency>
                 <groupId>ai.tock</groupId>
-                <artifactId>tock-nlp-model-rasa</artifactId>
-                <version>${tock}</version>
-            </dependency>
-            <dependency>
-                <groupId>ai.tock</groupId>
                 <artifactId>tock-bot-demo-api-webhook</artifactId>
                 <version>${demo}</version>
             </dependency>
@@ -155,61 +96,9 @@
             </dependency>
 
             <dependency>
-                <groupId>ai.tock</groupId>
-                <artifactId>tock-gen-ai-orchestrator-server</artifactId>
-                <type>zip</type>
-                <version>${tock}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.module</groupId>
-                <artifactId>jackson-module-kotlin</artifactId>
-                <version>${jackson}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson-databinding}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-jsr310</artifactId>
-                <version>${jackson}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp-urlconnection</artifactId>
-                <version>${okhttp}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>logging-interceptor</artifactId>
-                <version>${okhttp}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-stdlib</artifactId>
-                <version>${kotlin}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-reflect</artifactId>
-                <version>${kotlin}</version>
-            </dependency>
-            <dependency>
                 <groupId>net.logstash.logback</groupId>
                 <artifactId>logstash-logback-encoder</artifactId>
-                <version>${logback}</version>
+                <version>${logstash-logback-encoder}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -237,6 +126,58 @@
                                     </includes>
                                 </resource>
                             </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- the docker build context is not cleaned by docker:build: remove the jars of previous builds -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${plugin.clean}</version>
+                <executions>
+                    <execution>
+                        <id>clean-docker-build-context</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <configuration>
+                            <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                            <filesets>
+                                <fileset>
+                                    <directory>${project.build.directory}/docker</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${plugin.enforcer}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-dependency-convergence</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <!-- a single version of each of these libraries must be packaged in the images -->
+                                <dependencyConvergence>
+                                    <includes>
+                                        <include>ai.tock</include>
+                                        <include>io.netty</include>
+                                        <include>com.fasterxml.jackson.core</include>
+                                        <include>tools.jackson.core</include>
+                                        <include>org.jetbrains.kotlin</include>
+                                        <include>org.jetbrains.kotlinx</include>
+                                        <include>software.amazon.awssdk</include>
+                                    </includes>
+                                </dependencyConvergence>
+                            </rules>
                         </configuration>
                     </execution>
                 </executions>
