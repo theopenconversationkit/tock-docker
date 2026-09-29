@@ -29,10 +29,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <major>26.3-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>26.3.5-SNAPSHOT</tock>
-        <bot-open-data>26.3.5-SNAPSHOT</bot-open-data>
-        <stanford>26.3.5-SNAPSHOT</stanford>
-        <demo>26.3.5-SNAPSHOT</demo>
+        <tock>26.9.0</tock>
+        <bot-open-data>26.9.0</bot-open-data>
+        <stanford>26.9.0</stanford>
+        <demo>26.9.0</demo>
 
         <!-- versions of Tock dependencies come from ai.tock:tock-bom, only the other dependencies are listed here -->
         <logstash-logback-encoder>9.0</logstash-logback-encoder>
