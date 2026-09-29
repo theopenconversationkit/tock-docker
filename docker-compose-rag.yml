@@ -226,6 +226,9 @@ services:
       OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
 
   gen_ai_orchestrator-server:
+    # Reach the services of the host (e.g. Ollama) at host.docker.internal, also on Linux
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     image: "${PLATFORM}tock/gen-ai-orchestrator-server:${TAG}"
     ports:
       - "8000:8000"

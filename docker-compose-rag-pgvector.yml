@@ -189,6 +189,9 @@ services:
       - ./scripts/pgvector/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   gen_ai_orchestrator-server:
+    # Reach the services of the host (e.g. Ollama) at host.docker.internal, also on Linux
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     image: "${PLATFORM}tock/gen-ai-orchestrator-server:${TAG}"
     ports:
       - "8000:8000"
