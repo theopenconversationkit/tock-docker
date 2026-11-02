@@ -27,12 +27,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <major>26.3-SNAPSHOT</major>
+        <major>26.9-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
-        <tock>26.9.0</tock>
-        <bot-open-data>26.9.0</bot-open-data>
-        <stanford>26.9.0</stanford>
-        <demo>26.9.0</demo>
+        <tock>26.9.1</tock>
+        <bot-open-data>26.9.1</bot-open-data>
+        <stanford>26.9.1</stanford>
+        <demo>26.9.1</demo>
 
         <!-- versions of Tock dependencies come from ai.tock:tock-bom, only the other dependencies are listed here -->
         <logstash-logback-encoder>9.0</logstash-logback-encoder>
@@ -43,7 +43,7 @@
         <plugin.resources>3.5.0</plugin.resources>
         <plugin.assembly>3.8.0</plugin.assembly>
         <plugin.clean>3.5.0</plugin.clean>
-        <plugin.enforcer>3.6.3</plugin.enforcer>
+        <plugin.enforcer>3.7.0</plugin.enforcer>
 
         <maven.version.ignore>(?i).*-(alpha|beta|m|rc)([-.]?\d+)?</maven.version.ignore>
     </properties>
