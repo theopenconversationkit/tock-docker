@@ -54,10 +54,7 @@ class BotApiQualificationTest : E2eTestBase() {
     @Order(2)
     fun `bot webhook configuration`() {
         page.goTo("/configuration/bot")
-        val item = page.locator("nb-accordion-item").first()
-        val webhook = item.getByPlaceholder(containing("webhook url"))
-        item.locator("nb-accordion-item-header").first().click()
-        if (!webhook.isVisible) item.locator("nb-accordion-item-header").first().click()
+        val webhook = page.botWebhookInput()
         webhook.fill(E2eConfig.webhookUrl)
         webhook.press("Enter")
         assertThat(page.getByText(containing("webhook saved"))).isVisible()
