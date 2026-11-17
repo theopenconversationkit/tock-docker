@@ -24,10 +24,7 @@ class AfterRestartTest : E2eTestBase() {
     fun `login to the Studio, the application exists`() {
         page.login()
         page.goTo("/configuration/bot")
-        val item = page.locator("nb-accordion-item").first()
-        val webhook = item.getByPlaceholder(containing("webhook url"))
-        item.locator("nb-accordion-item-header").first().click()
-        if (!webhook.isVisible) item.locator("nb-accordion-item-header").first().click()
+        val webhook = page.botWebhookInput()
         assertThat(webhook).hasValue(E2eConfig.webhookUrl)
     }
 

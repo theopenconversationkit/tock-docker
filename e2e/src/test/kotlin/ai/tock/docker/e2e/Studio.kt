@@ -60,6 +60,24 @@ fun Page.goTo(path: String) {
     assertThat(this).hasURL(Pattern.compile(".*${escapeRegex(path)}.*"))
 }
 
+/**
+ * Webhook url input of the first bot configuration (Settings > Configurations), its accordion item expanded.
+ * The item is toggled only from its collapsed state: its content is rendered with an animation,
+ * so the visibility of the input right after a click does not tell whether the item is expanded.
+ */
+fun Page.botWebhookInput(): Locator {
+    val item = locator("nb-accordion-item").first()
+    val expanded = Pattern.compile("(^|\\s)expanded(\\s|$)")
+    assertThat(item).isVisible()
+    if (!expanded.matcher(item.getAttribute("class").orEmpty()).find()) {
+        item.locator("nb-accordion-item-header").first().click()
+    }
+    assertThat(item).hasClass(expanded)
+    val webhook = item.getByPlaceholder(containing("webhook url"))
+    assertThat(webhook).isEditable()
+    return webhook
+}
+
 /** Opens a nb-select and picks the matching option (the list is rendered in an overlay). */
 fun Page.selectNbOption(select: Locator, option: Pattern) {
     select.click()
