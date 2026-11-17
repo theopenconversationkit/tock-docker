@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Scénario e2e : bot en mode API + qualification de phrases dans Tock Studio.
+# e2e scenario: bot in API mode + sentence qualification in Tock Studio.
 #
 #   ./e2e/run-e2e.sh [--build] [--keep]
 #
-#   --build  construit tock (../tock) puis les images SNAPSHOT des services qui utilisent Mongo
-#   --keep   laisse la stack démarrée à la fin (sinon : docker compose down -v)
+#   --build  builds tock (../tock), then the SNAPSHOT images of the services that use Mongo
+#   --keep   keeps the stack running at the end (otherwise: docker compose down -v)
 #
-# Variables : TAG (images testées, défaut : version du pom tock-docker, celle des images construites), STABLE_TAG (duckling, kotlin_compiler,
-# bot démo, défaut 26.9.1), TOCK_DIR (défaut ../tock), BUILDX_BUILDER (défaut mybuilder).
+# Variables: TAG (tested images, default: tock-docker pom version, i.e. the version of the built images), STABLE_TAG (duckling, kotlin_compiler,
+# demo bot, default 26.9.1), TOCK_DIR (default ../tock), BUILDX_BUILDER (default mybuilder).
 set -euo pipefail
 
 E2E_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -25,7 +25,7 @@ for arg in "$@"; do
   case "$arg" in
     --build) BUILD=true ;;
     --keep) KEEP=true ;;
-    *) echo "option inconnue : $arg" >&2; exit 2 ;;
+    *) echo "unknown option: $arg" >&2; exit 2 ;;
   esac
 done
 
@@ -41,7 +41,7 @@ if $BUILD; then
     -pl ai.tock:tock-bot-admin-web,ai.tock:tock-nlp-api-doc,ai.tock:tock-bot-admin-server,ai.tock:tock-nlp-admin-server,ai.tock:tock-nlp-model-rasa,ai.tock:tock-nlp-api-service,ai.tock:tock-nlp-build-model-worker,ai.tock:tock-nlp-build-model-worker-on-aws-batch,ai.tock:tock-bot-api-service \
     -am
   echo "== build images $TAG"
-  # buildx multi-plateforme : seule l'image native est chargée dans le démon local
+  # multi-platform buildx: only the native image is loaded into the local daemon
   BUILDX_BUILDER="${BUILDX_BUILDER:-mybuilder}" mvn -f "$DOCKER_DIR/pom.xml" \
     -Dtock="$TOCK_VERSION" -pl bot-admin,nlp-api,nlp-build-model-worker,bot-api \
     package docker:build
@@ -49,12 +49,12 @@ fi
 
 for port in 80 8080 8887 8888 27017 27018 27019; do
   if (exec 3<>"/dev/tcp/127.0.0.1/$port") 2>/dev/null; then
-    echo "port $port déjà utilisé : arrêtez la stack qui l'occupe" >&2
+    echo "port $port already in use: stop the stack using it" >&2
     exit 1
   fi
 done
 
-# Rapport (non bloquant) des erreurs des services tock : les erreurs connues y figurent aussi.
+# Non-blocking report of the tock services errors: known errors are listed too.
 report_errors() {
   mkdir -p "$E2E_DIR/logs"
   compose logs --no-color > "$E2E_DIR/logs/compose.log" 2>&1 || true
@@ -66,15 +66,15 @@ report_errors() {
       | sed -E 's/^[0-9T:.-]+ \[[^]]*\] //; s/[0-9a-f]{24}/<id>/g; s/[0-9]+/<n>/g' \
       | cut -c1-200 | sort | uniq -c | sort -rn | sed "s/^/$service: /" >> "$report" || true
   done
-  echo "== erreurs dans les logs (non bloquant, détail : $E2E_DIR/logs/compose.log)"
-  if [ -s "$report" ]; then cat "$report"; else echo "aucune"; fi
+  echo "== errors in the logs (non-blocking, details: $E2E_DIR/logs/compose.log)"
+  if [ -s "$report" ]; then cat "$report"; else echo "none"; fi
 }
 
 cleanup() {
   status=$?
   report_errors
   if $KEEP; then
-    echo "stack conservée (projet $PROJECT)"
+    echo "stack kept (project $PROJECT)"
   else
     compose down -v --remove-orphans >/dev/null 2>&1 || true
   fi
@@ -82,12 +82,12 @@ cleanup() {
 }
 trap cleanup EXIT
 
-echo "== démarrage (TAG=$TAG, STABLE_TAG=$STABLE_TAG)"
+echo "== startup (TAG=$TAG, STABLE_TAG=$STABLE_TAG)"
 compose up -d
 
 wait_for() {
   local url=$1 deadline=$((SECONDS + 300))
-  printf 'attente %s ' "$url"
+  printf 'waiting for %s ' "$url"
   until curl -sf -o /dev/null "$url"; do
     if [ $SECONDS -gt $deadline ]; then echo " timeout"; return 1; fi
     printf '.'; sleep 3
@@ -102,12 +102,12 @@ wait_services() {
 }
 wait_services
 
-echo "== tests Playwright (Kotlin)"
+echo "== Playwright tests (Kotlin)"
 mvn -f "$E2E_DIR/pom.xml" test
 
-echo "== redémarrage des services tock"
+echo "== restart of the tock services"
 compose restart admin_web nlp_api build_worker bot_api
 wait_services
 
-echo "== tests après redémarrage"
+echo "== tests after restart"
 mvn -f "$E2E_DIR/pom.xml" test -Dtest=AfterRestartTest

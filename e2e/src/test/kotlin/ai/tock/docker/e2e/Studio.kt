@@ -12,7 +12,7 @@ import java.time.Duration
 import java.util.regex.Pattern
 
 /*
- * Helpers Tock Studio : les sélecteurs fragiles (Nebular, boutons à icône seule) sont regroupés ici.
+ * Tock Studio helpers: the fragile selectors (Nebular, icon-only buttons) are grouped here.
  */
 
 private fun env(name: String, default: String): String = System.getenv(name)?.takeIf { it.isNotBlank() } ?: default
@@ -26,14 +26,14 @@ object E2eConfig {
     val webhookUrl = env("DEMO_WEBHOOK_URL", "http://demo_api_webhook:8887")
     val headless = env("HEADLESS", "true").toBoolean()
 
-    /** Pour itérer sur une stack déjà initialisée : l'assistant de création est sauté si l'application existe. */
+    /** To iterate on an already initialized stack: the creation wizard is skipped if the application exists. */
     val reuseStack = env("E2E_REUSE_STACK", "false").toBoolean()
     const val APP_NAME = "new_assistant"
     const val NAMESPACE = "app"
     const val WEB_CONNECTOR_PATH = "/io/app/$APP_NAME/web"
 }
 
-/** Échappement compatible JavaScript : Playwright transmet les Pattern au navigateur (pas de \\Q...\\E). */
+/** JavaScript-compatible escaping: Playwright passes the Patterns to the browser (no \\Q...\\E). */
 fun escapeRegex(text: String): String = text.replace(Regex("[.*+?^\${}()|\\[\\]\\\\/-]")) { "\\" + it.value }
 
 fun exact(text: String): Pattern = Pattern.compile("^\\s*${escapeRegex(text)}\\s*$", Pattern.CASE_INSENSITIVE)
@@ -53,20 +53,20 @@ fun Page.login() {
 }
 
 /**
- * Navigation interne à la SPA (routeur Angular) : un rechargement complet fait perdre la session du Studio.
+ * Navigation inside the SPA (Angular router): a full reload makes the Studio lose its session.
  */
 fun Page.goTo(path: String) {
     evaluate("p => { history.pushState({}, '', p); dispatchEvent(new PopStateEvent('popstate', { state: {} })); }", path)
     assertThat(this).hasURL(Pattern.compile(".*${escapeRegex(path)}.*"))
 }
 
-/** Ouvre un nb-select et choisit l'option correspondante (la liste est rendue dans un overlay). */
+/** Opens a nb-select and picks the matching option (the list is rendered in an overlay). */
 fun Page.selectNbOption(select: Locator, option: Pattern) {
     select.click()
     locator("nb-option-list nb-option", Page.LocatorOptions().setHasText(option)).first().click()
 }
 
-/** Carte d'une phrase dans une liste tock-sentence-training. */
+/** Card of a sentence in a tock-sentence-training list. */
 fun Page.sentenceCard(text: String): Locator =
     locator("tock-sentence-training-entry")
         .filter(
@@ -75,7 +75,7 @@ fun Page.sentenceCard(text: String): Locator =
             ),
         ).first()
 
-/** Crée un intent depuis la carte (bouton boussole « Create new Intent ») ; il est associé à la phrase. */
+/** Creates an intent from the card (compass button "Create new Intent"); it is associated with the sentence. */
 fun Page.createIntentFromSentence(card: Locator, intentName: String) {
     card.locator("button.lineFirstButtonRetract:has(nb-icon[icon=\"compass\"])").click()
     val dialog = locator("nb-dialog-container")
@@ -85,7 +85,7 @@ fun Page.createIntentFromSentence(card: Locator, intentName: String) {
     assertThat(dialog).isHidden()
 }
 
-/** Associe un intent existant via l'autocomplete de la carte. */
+/** Associates an existing intent through the card autocomplete. */
 fun Page.selectIntent(card: Locator, intentName: String) {
     val input = card.locator("input.intent-input")
     input.click()
@@ -94,8 +94,8 @@ fun Page.selectIntent(card: Locator, intentName: String) {
 }
 
 /**
- * Annote [text] de la phrase avec l'entité [entityType] : le Studio réagit à une sélection de texte (window.getSelection)
- * suivie d'un mouseup sur le composant de la phrase. L'entité est créée si elle n'est pas encore proposée.
+ * Annotates [text] of the sentence with the [entityType] entity: the Studio reacts to a text selection (window.getSelection)
+ * followed by a mouseup on the sentence component. The entity is created if it is not offered yet.
  */
 fun Page.annotateEntity(
     card: Locator,
@@ -143,7 +143,7 @@ fun Locator.validateSentence() {
 
 private val mapper = jacksonObjectMapper()
 
-/** Envoie un message au bot via le connecteur web de bot_api et renvoie les textes de réponse. */
+/** Sends a message to the bot through the bot_api web connector and returns the answer texts. */
 fun APIRequestContext.talk(query: String, userId: String): List<String> {
     val response =
         post(
@@ -159,7 +159,7 @@ fun APIRequestContext.talk(query: String, userId: String): List<String> {
     return body.path("responses").map { it.path("text").asText(it.toString()) }
 }
 
-/** Analyse NLP d'une phrase via nlp_api, sans l'enregistrer dans l'Inbox (`test = true`). */
+/** NLP parsing of a sentence through nlp_api, without saving it in the Inbox (`test = true`). */
 fun APIRequestContext.parse(query: String): JsonNode {
     val response =
         post(
@@ -176,11 +176,11 @@ fun APIRequestContext.parse(query: String): JsonNode {
                 ).setFailOnStatusCode(false)
                 .setTimeout(60_000.0),
         )
-    if (!response.ok()) throw AssertionError("parse \"$query\" : HTTP ${response.status()} ${response.text()}")
+    if (!response.ok()) throw AssertionError("parse \"$query\": HTTP ${response.status()} ${response.text()}")
     return mapper.readTree(response.text())
 }
 
-/** Entités détectées : "nom du type" -> (texte reconnu, probabilité). */
+/** Detected entities: "type name" -> (recognized text, probability). */
 data class DetectedEntity(val type: String, val text: String, val probability: Double)
 
 fun JsonNode.detectedEntities(query: String): List<DetectedEntity> =
@@ -192,7 +192,7 @@ fun JsonNode.detectedEntities(query: String): List<DetectedEntity> =
         )
     }
 
-/** Réessaie [block] jusqu'à ce qu'il réussisse ou que [timeout] soit écoulé. */
+/** Retries [block] until it succeeds or [timeout] has elapsed. */
 fun <T> eventually(
     timeout: Duration,
     interval: Duration = Duration.ofSeconds(5),

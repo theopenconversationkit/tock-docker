@@ -21,14 +21,14 @@ import org.junit.jupiter.api.extension.TestWatcher
 import java.nio.file.Path
 import java.nio.file.Paths
 
-/** Données partagées par les étapes, avant et après le redémarrage des services. */
+/** Data shared by the steps, before and after the services restart. */
 object Scenario {
     const val GREETINGS = "greetings"
     val greetingVariants = listOf("hi", "good morning", "hey there")
     const val TRAVEL = "travel"
     const val CITY = "city"
 
-    /** Phrases d'entraînement de l'intent travel, avec la ville annotée comme entité city. */
+    /** Training sentences of the travel intent, with the city annotated as a city entity. */
     val travelSentences =
         listOf(
             "I want to go to Paris" to "Paris",
@@ -36,7 +36,7 @@ object Scenario {
             "I would like to travel to Berlin" to "Berlin",
         )
 
-    /** Même structure que "book a train to London", avec une autre ville : la phrase n'existe pas en base. */
+    /** Same structure as "book a train to London", with another city: the sentence is not in the database. */
     const val TRAVEL_VARIANT = "book a train to Paris"
     const val TRAVEL_VARIANT_CITY = "Paris"
 
@@ -44,9 +44,9 @@ object Scenario {
 }
 
 /**
- * Cycle de vie Playwright commun : un navigateur et une page partagés par les étapes d'une classe.
- * Les étapes partagent l'état de la stack : elles s'exécutent dans l'ordre et
- * les suivantes sont ignorées dès qu'une étape échoue (capture d'écran de l'étape en échec, trace de la classe).
+ * Common Playwright lifecycle: a browser and a page shared by the steps of a class.
+ * The steps share the stack state: they run in order and
+ * the next ones are skipped as soon as a step fails (screenshot of the failed step, trace of the class).
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
@@ -100,6 +100,6 @@ abstract class E2eTestBase {
 
     @BeforeEach
     fun skipAfterFailure() {
-        assumeFalse(failed, "une étape précédente a échoué")
+        assumeFalse(failed, "a previous step failed")
     }
 }

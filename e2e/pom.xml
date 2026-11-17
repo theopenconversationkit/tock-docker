@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Scénario e2e Tock Studio + bot en mode API (Playwright, Kotlin).
-  Module autonome (hors du réacteur tock-docker) : lancé par run-e2e.sh une fois la stack démarrée.
+  e2e scenario Tock Studio + bot in API mode (Playwright, Kotlin).
+  Standalone module (outside the tock-docker reactor): run by run-e2e.sh once the stack is started.
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -67,10 +67,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${plugin.surefire}</version>
                 <configuration>
-                    <!-- la stack est partagée : une seule JVM, classes et méthodes séquentielles -->
+                    <!-- the stack is shared: a single JVM, sequential classes and methods -->
                     <forkCount>1</forkCount>
                     <trimStackTrace>false</trimStackTrace>
-                    <!-- lancé par run-e2e.sh avec -Dtest=AfterRestartTest, après le redémarrage des services -->
+                    <!-- run by run-e2e.sh with -Dtest=AfterRestartTest, after the services restart -->
                     <excludes>
                         <exclude>**/AfterRestartTest.java</exclude>
                     </excludes>

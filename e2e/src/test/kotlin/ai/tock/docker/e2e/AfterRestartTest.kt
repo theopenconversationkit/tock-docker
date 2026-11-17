@@ -11,17 +11,17 @@ import org.junit.jupiter.api.Test
 import java.time.Duration
 
 /**
- * Exécuté par run-e2e.sh après [BotApiQualificationTest] et le redémarrage de admin_web, nlp_api,
- * build_worker et bot_api : tout ce qui a été écrit doit être relu depuis Mongo (et GridFS pour le modèle).
- * Exclu d'un `mvn test` simple : le lancer avec `-Dtest=AfterRestartTest` sur une stack redémarrée.
+ * Run by run-e2e.sh after [BotApiQualificationTest] and the restart of admin_web, nlp_api,
+ * build_worker and bot_api: everything that was written must be read back from Mongo (and GridFS for the model).
+ * Excluded from a plain `mvn test`: run it with `-Dtest=AfterRestartTest` on a restarted stack.
  */
-@DisplayName("Après redémarrage des services")
+@DisplayName("After services restart")
 class AfterRestartTest : E2eTestBase() {
     private val user = "e2e-user-after-restart-${System.currentTimeMillis()}"
 
     @Test
     @Order(1)
-    fun `connexion au Studio, l'application existe`() {
+    fun `login to the Studio, the application exists`() {
         page.login()
         page.goTo("/configuration/bot")
         val item = page.locator("nb-accordion-item").first()
@@ -33,28 +33,28 @@ class AfterRestartTest : E2eTestBase() {
 
     @Test
     @Order(2)
-    fun `le bot répond via le webhook avec le modèle rechargé`() {
+    fun `the bot answers through the webhook with the reloaded model`() {
         eventually(Duration.ofSeconds(90), Duration.ofSeconds(3)) {
             val answers = api.talk("hello", user)
-            assertTrue(answers.any { "Hello hello" in it }, "réponses : $answers")
+            assertTrue(answers.any { "Hello hello" in it }, "answers: $answers")
         }
     }
 
     @Test
     @Order(3)
-    fun `phrase exacte - entité restituée depuis la base`() {
+    fun `exact sentence - entity read back from the database`() {
         api.assertExactTravelSentence()
     }
 
     @Test
     @Order(4)
-    fun `phrase proche - entité détectée par le modèle chargé depuis GridFS`() {
+    fun `close sentence - entity detected by the model loaded from GridFS`() {
         api.assertTravelVariantDetectedByModel(Duration.ofSeconds(60))
     }
 
     @Test
     @Order(5)
-    fun `relecture des phrases validées et annotées`() {
+    fun `read-back of the validated and annotated sentences`() {
         page.assertSearchedSentence("hello", GREETINGS)
         val (sentence, city) = travelSentences.first()
         page.assertSearchedSentence(sentence, TRAVEL, annotatedText = city)
@@ -62,23 +62,23 @@ class AfterRestartTest : E2eTestBase() {
 
     @Test
     @Order(6)
-    fun `relecture des dialogues d'avant le redémarrage`() {
+    fun `read-back of the dialogs from before the restart`() {
         page.assertDialogContains("Sorry - not understood")
     }
 
     @Test
     @Order(7)
-    fun `qualification après redémarrage, reconstruction et rechargement du modèle`() {
+    fun `qualification after restart, model rebuild and reload`() {
         val sentence = "good evening"
         page.addSentence(sentence)
         val card = page.sentenceCard(sentence)
         page.selectIntent(card, GREETINGS)
         card.validateSentence()
         assertThat(card).isHidden()
-        // la phrase est relue depuis la base aussitôt validée ; une autre phrase proche passe par le modèle reconstruit
+        // the sentence is read back from the database as soon as it is validated; another close sentence goes through the rebuilt model
         eventually(Duration.ofMinutes(2), Duration.ofSeconds(5)) {
             val answers = api.talk(sentence, user)
-            assertTrue(answers.any { "Hello $sentence" in it }, "réponses : $answers")
+            assertTrue(answers.any { "Hello $sentence" in it }, "answers: $answers")
         }
         api.assertTravelVariantDetectedByModel(Duration.ofMinutes(2))
     }

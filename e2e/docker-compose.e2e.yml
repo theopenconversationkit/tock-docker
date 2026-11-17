@@ -1,6 +1,6 @@
-# Surcharge de docker-compose-bot-webhook.yml pour le scénario e2e.
-# - les services sans Mongo (duckling, kotlin_compiler) et le bot démo restent sur une release publiée
-# - les clients Open WebUI et web React ne servent pas au scénario
+# Override of docker-compose-bot-webhook.yml for the e2e scenario.
+# - the services without Mongo (duckling, kotlin_compiler) and the demo bot stay on a published release
+# - the Open WebUI and React web clients are not used by the scenario
 services:
   mongo-setup:
     container_name: "tock-e2e-mongo-setup"
