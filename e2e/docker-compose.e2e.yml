@@ -1,0 +1,16 @@
+# Override of docker-compose-bot-webhook.yml for the e2e scenario.
+# - the services without Mongo (duckling, kotlin_compiler) and the demo bot stay on a published release
+# - the Open WebUI and React web clients are not used by the scenario
+services:
+  mongo-setup:
+    container_name: "tock-e2e-mongo-setup"
+  duckling:
+    image: "tock/duckling:${STABLE_TAG:-26.9.1}"
+  kotlin_compiler:
+    image: "tock/kotlin_compiler:${STABLE_TAG:-26.9.1}"
+  demo_api_webhook:
+    image: "tock/bot_api_webhook:${STABLE_TAG:-26.9.1}"
+  open_web_ui:
+    profiles: [ "disabled" ]
+  web:
+    profiles: [ "disabled" ]
